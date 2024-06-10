@@ -23,12 +23,14 @@
                                         Create User
                                     </button>
                                 </h4>
+                                <div id="errorMessage" class="alert alert-danger" style="display:none;"></div>
                                 <div class="table-responsive">
                                     <table id="basic-datatable" class="table table-hover dt-responsive nowrap w-100">
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Email</th>
+                                                <th>role</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
@@ -37,6 +39,7 @@
                                             <tr>
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->email }}</td>
+                                                <td>{{ $user->role ? $user->role->name : 'No Assigned Role Yet' }}</td>
                                                 <td>
                                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editUserModal{{ $user->id }}">Edit</button>
                                                     @if($user->is_active)
@@ -74,6 +77,15 @@
                                                                     <label for="email">Email</label>
                                                                     <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
                                                                 </div>
+                                                                <div class="form-group">
+                                                                    <label for="role_id">Role</label>
+                                                                    <select class="form-control" id="role_id" name="role_id">
+                                                                        <option value="" {{ !$user->role_id ? 'selected' : '' }} disabled>Select Role</option>
+                                                                        @foreach($roles as $role)
+                                                                            <option value="{{ $role->id }}" {{ $user->role_id == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>                                                                                                                           
                                                                 <button type="submit" class="btn btn-primary">Update</button>
                                                             </form>
                                                         </div>
@@ -98,7 +110,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ route('users.store') }}" method="POST">
+                            <form id="createUserForm" action="{{ route('users.store') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Name</label>
@@ -116,6 +128,18 @@
                                     <label for="confirm_password">Confirm Password</label>
                                     <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
                                 </div>
+                                <div id="passwordError" class="text-danger" style="display:none;">
+                                    The password and confirm password does not match.
+                                </div>
+                                <div class="form-group">
+                                    <label for="role_id">Role</label>
+                                    <select class="form-control" id="role_id" name="role_id">
+                                        <option value="" selected disabled>Select Role</option>
+                                        @foreach($roles as $role)
+                                            <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <button type="submit" class="btn btn-primary">Create</button>
                             </form>                            
                         </div>
@@ -125,4 +149,42 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var createUserForm = document.getElementById('createUserForm');
+        var password = document.getElementById('password');
+        var confirmPassword = document.getElementById('confirm_password');
+        var passwordError = document.getElementById('passwordError');
+        var errorMessage = document.getElementById('errorMessage'); 
+        var errorMessageSession = '{{ session("error") }}'; 
+
+
+        createUserForm.addEventListener('submit', function (e) {
+            if (password.value !== confirmPassword.value) {
+                e.preventDefault();
+                passwordError.style.display = 'block';
+            } else {
+                passwordError.style.display = 'none';
+            }
+        });
+
+        function displayErrorMessage(message) {
+            errorMessage.innerText = message;
+            errorMessage.style.display = 'block';
+            setTimeout(function () {
+                errorMessage.style.display = 'none';
+            }, 3000); // Hide after 3 seconds
+        }
+
+        // Check if error message is present in the session and display it
+        var errorMessageSession = '{{ session("error") }}'; // Get error message from session
+        if (errorMessageSession) {
+            displayErrorMessage(errorMessageSession);
+        }
+
+    });
+</script>
+
 @endsection

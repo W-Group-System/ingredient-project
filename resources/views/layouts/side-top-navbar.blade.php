@@ -28,21 +28,57 @@
             <!--- Sidemenu -->
             <ul class="side-nav">
 
-                <li class="side-nav-title side-nav-item">Navigation</li>
-
-                <li class="side-nav-item">
-                    <a data-bs-toggle="collapse" href="#sidebarDashboards" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
-                        <i class="uil-home-alt"></i>
-                        <span class="badge bg-success float-end">4</span>
-                        <span> Dashboards </span>
-                    </a>
+                <li class="side-nav-title side-nav-item"></li>
                     <li class="side-nav-item">
-                        <a href="{{ route('users.index') }}" class="side-nav-link">
-                            <i class="uil-calender"></i>
-                            <span> Users </span>
+                        <a data-bs-toggle="collapse" href="#sidebarDashboards" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                            <i class="uil-home-alt"></i>
+                            <span> Admin </span>
+                        </a>
+                        <div class="collapse" id="sidebarDashboards">
+                            <ul class="side-nav-second-level">
+                                <li>
+                                    <a href="{{ route('users.index') }}">
+                                        <i class="uil-user"></i>
+                                        <span> Users </span></a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('setup.roles') }}">
+                                        <i class=" uil-lock-access"></i>
+                                        <span> Roles Setup </span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="{{ route('product_name.product_name') }}"  class="side-nav-link">
+                            <i class="uil-package"></i>
+                            <span> Product Name </span>
                         </a>
                     </li>
-                </li>
+                    <li class="side-nav-item">
+                        <a href="{{ route('booked_order.booked_order_type') }}"  class="side-nav-link">
+                            <i class="uil-package"></i>
+                            <span> Booked Orders </span>
+                        </a>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="{{ route('inventory.inventory') }}"  class="side-nav-link">
+                            <i class="uil-box"></i>
+                            <span> Inventory </span>
+                        </a>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="{{ route('product_percentage.product_percentage') }}"  class="side-nav-link">
+                            <i class="uil-box"></i>
+                            <span> Product Percentage </span>
+                        </a>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="{{ route('inventory.ingredients-inventory') }}"  class="side-nav-link">
+                            <i class="uil-box"></i>
+                            <span> Ingredients Allocation </span>
+                        </a>
+                    </li>
             </ul>
         </div>
         
@@ -53,7 +89,7 @@
      <!-- Topbar Start -->
      <div class="navbar-custom">
         <ul class="list-unstyled topbar-menu float-end mb-0">
-            <li class="dropdown notification-list d-lg-none">
+            {{-- <li class="dropdown notification-list d-lg-none">
                 <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     <i class="dripicons-search noti-icon"></i>
                 </a>
@@ -62,9 +98,9 @@
                         <input type="text" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
                     </form>
                 </div>
-            </li>
+            </li> --}}
 
-            <li class="dropdown notification-list">
+            {{-- <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     <i class="dripicons-bell noti-icon"></i>
                     <span class="noti-icon-badge"></span>
@@ -151,13 +187,13 @@
                     </a>
 
                 </div>
-            </li>
+            </li> --}}
             
-            <li class="notification-list">
+            {{-- <li class="notification-list">
                 <a class="nav-link end-bar-toggle" href="javascript: void(0);">
                     <i class="dripicons-gear noti-icon"></i>
                 </a>
-            </li>
+            </li> --}}
 
             <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -195,7 +231,7 @@
         <button class="button-menu-mobile open-left">
             <i class="mdi mdi-menu"></i>
         </button>
-        <div class="app-search dropdown d-none d-lg-block">
+        {{-- <div class="app-search dropdown d-none d-lg-block">
             <form>
                 <div class="input-group">
                     <input type="text" class="form-control dropdown-toggle" placeholder="Search..." id="top-search">
@@ -257,7 +293,7 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
     <!-- end Topbar -->
 </div>

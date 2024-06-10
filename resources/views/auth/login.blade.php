@@ -1,6 +1,7 @@
 @extends('layouts.login')
 
 @section('content')
+
 <div class="middle-box text-center loginscreen animated fadeInDown mt-5">
     <div>
         <div class="m-b-md mt-5">

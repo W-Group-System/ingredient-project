@@ -1,105 +1,63 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <!-- CSRF Token -->
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>@yield('title', 'Customer Relationship Management System')</title>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+    <title>{{ config('app.name', 'Laravel') }}</title>
+    {{-- <link rel="shortcut icon" href="{{ URL::asset(config('logo.logos')::first()->icon)}}"> --}}
+    <!-- Scripts -->
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
+    
+    {{-- <link rel="stylesheet" href="{{asset('login_css/fonts/icomoon/style.css')}}">
+    <link rel="stylesheet" href="{{asset('login_css/css/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('login_css/css/bootstrap.min.css')}}"> --}}
+    <link rel="stylesheet" href="{{asset('login_css/css/style.css')}}">
 
-        <!-- Fonts -->
-        <link rel="dns-prefetch" href="//fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+    {{-- <link rel="stylesheet" href="{{ asset('/body_css/vendors/feather/feather.css') }}">
+    <link rel="stylesheet" href="{{ asset('/body_css/vendors/ti-icons/css/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('/body_css/vendors/css/vendor.bundle.base.css') }}"> --}}
 
-        <!-- Styles -->
-        <link href="{{ asset('css/feather.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/themify-icons.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/vendor.bundle.base.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-        <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
-        <link rel="icon" href="{{asset('images/wgroup.png')}}" type="image/x-icon">
-    </head>
-    <style>
-        .loader {
-            position: fixed;
-            left: 0px;
-            top: 0px;
-            width: 100%;
-            height: 100%;
-            z-index: 9999;
-            background: url("{{ asset('images/loading.gif') }}") 50% 50% no-repeat white;
-            opacity: .8;
-            background-size: 120px 120px;
-        }  
-    </style>
-    <body>
-        <div class="loader" id="loader" style="display: none;"></div>
-        <div id="app">
-            <!-- <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-                <div class="container">
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+    {{-- <link rel="stylesheet" href="{{ asset('/body_css/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
+    <link rel="stylesheet" href="{{ asset('/body_css/vendors/ti-icons/css/themify-icons.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/body_css/js/select.dataTables.min.css') }}"> --}}
+    <!-- Plugin css for this page -->
+    {{-- <link rel="stylesheet" href="{{ asset('/body_css/vendors/select2/select2.min.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('/body_css/vendors/select2-bootstrap-theme/select2-bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/body_css/css/vertical-layout-light/style.css') }}">
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                        </ul>
-                        <ul class="navbar-nav ml-auto">
-                            @guest
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                                @if (Route::has('register'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    </li>
-                                @endif
-                            @else
-                                <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ Auth::user()->name }} <span class="caret"></span>
-                                    </a>
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+    {{--
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css"> --}}
+</head>
 
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
-                                        </a>
+<style>
+    .control input:checked ~ .control__indicator {
+        background: #3f3e91 !important;
+    }
+</style>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </li>
-                            @endguest
-                        </ul>
-                    </div>
-                </div>
-            </nav> -->
+<body>
+    <div id="loader" style="display:none;" class="loader">
+    </div>
+    <div id="app">
+        <main class="py-4">
             @yield('content')
-            <!-- <main class="py-4">
-            </main> -->
-        </div>
-        <script src="{{ asset('js/vendor.bundle.base.js') }}"></script>
-        <script src="{{ asset('js/off-canvas.js') }}"></script>
-        <script src="{{ asset('js/hoverable-collapse.js') }}"></script>
-        <script src="{{ asset('js/template.js') }}"></script>
-        <script src="{{ asset('js/settings.js') }}"></script>
-        <script src="{{ asset('js/todolist.js') }}"></script>
-        <script>
-            function show() {
-                document.getElementById("loader").style.display = "block";
-            }
-        </script>
-    </body>
+        </main>
+    </div>
+
+    <script type='text/javascript'>
+        function show() {
+            document.getElementById("loader").style.display="block";
+        }
+    </script>
+</body>
+
 </html>

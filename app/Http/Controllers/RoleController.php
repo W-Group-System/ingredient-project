@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Role;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RoleController extends Controller
 {
@@ -19,8 +20,8 @@ class RoleController extends Controller
         $role->is_active = "1";
         $role->save();
 
-        return redirect()->back()->with('success', 'Role created successfully.');
-
+        Alert::success('Successfully Saved')->persistent('Dismiss');
+        return back();
     }
     public function update(Request $request, $id) 
     {
@@ -29,8 +30,8 @@ class RoleController extends Controller
         $role->description = $request->role_description;           
         $role->save();
 
-        return redirect()->back()->with('success', 'role updated successfully.');
-
+        Alert::success('Successfully Updated')->persistent('Dismiss');
+        return back();
     }
     public function activate($id)
     {
@@ -38,7 +39,8 @@ class RoleController extends Controller
         $role->is_active = "1";
         $role->save();
 
-        return redirect()->back()->with('success', 'Role activated successfully.');
+        Alert::success('Successfully Activated')->persistent('Dismiss');
+        return back();
     }
     public function deactivate($id)
     {
@@ -46,6 +48,7 @@ class RoleController extends Controller
         $role->is_active = "2";
         $role->save();
 
-        return redirect()->back()->with('success', 'Role deactivated successfully.');
+        Alert::success('Successfully Deactivated')->persistent('Dismiss');
+        return back();
     }
 }

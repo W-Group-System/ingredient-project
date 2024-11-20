@@ -15,8 +15,7 @@
                             <h3>Sign In to </h3>
                             <p class="mb-4"><strong>{{ config('app.name', 'Laravel') }}</strong></p>
                         </div>
-                        <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}"
-                            onsubmit='show()'>
+                        <form method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}" onsubmit='show()'>
                             @csrf
                             <div class="form-group first">
                                 <label for="email">Email</label>

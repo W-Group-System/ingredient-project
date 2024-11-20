@@ -42,6 +42,17 @@
     .control input:checked ~ .control__indicator {
         background: #3f3e91 !important;
     }
+    .loader {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background: url("{{ asset('img/loading.gif')}}") 50% 50% no-repeat white ;
+        opacity: .8;
+        background-size:120px 120px;
+    }
 </style>
 
 <body>

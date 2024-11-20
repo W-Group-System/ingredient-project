@@ -22,21 +22,21 @@
                             @foreach ($roles as $role)
                             <tr> 
                                 <td style="center">
-                                    <button type="button" class="btn btn-md btn-warning"
+                                    <button type="button" class="btn btn-icon btn-rounded btn-warning"
                                         data-target="#EditRole{{ $role->id }}" data-toggle="modal" title='edit'>
-                                        <i class="ti-eye"></i>
+                                        <i class="ti-pencil-alt"></i>
                                     </button> 
                                     @if($role->is_active == 1)
-                                    <form method="POST" action="{{url('deactivate_role/'.$role->id)}}" class="d-inline-block">
+                                    <form method="POST" action="{{url('deactivate_role/'.$role->id)}}" class="d-inline-block" onsubmit="show()">
                                         @csrf
-                                        <button type="button" class="btn btn-md btn-danger deactivate" title="Deactivate">
+                                        <button type="button" class="btn btn-icon btn-rounded btn-danger deactivate" title="Deactivate">
                                             <i class="ti-na"></i>
                                         </button>
                                     </form>
                                     @elseif($role->status != "1")
-                                    <form method="POST" action="{{url('activate_role/'.$role->id)}}" class="d-inline-block">
+                                    <form method="POST" action="{{url('activate_role/'.$role->id)}}" class="d-inline-block" onsubmit="show()">
                                         @csrf
-                                        <button type="button" class="btn btn-md btn-info activate" title="Activate">
+                                        <button type="button" class="btn btn-icon btn-rounded btn-info activate" title="Activate">
                                             <i class="ti-check"></i>
                                         </button>
                                     </form>

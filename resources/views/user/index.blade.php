@@ -11,27 +11,26 @@
                 <div class="table-responsive" >
                     <table class="table table-striped table-bordered table-hover tablewithSearch" >
                         <thead>
-                             <tr>
+                            <tr>
                                 <th>Action</th>
-                                <th>Username</th>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Company</th>
-                                <th>user</th>
+                                <th>Role</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($users as $user)
                             <tr> 
                                 <td style="center">
-                                    <button type="button" class="btn btn-md btn-warning"
-                                        data-target="#Edituser{{ $user->id }}" data-toggle="modal" title='edit'>
-                                        <i class="ti-eye"></i>
-                                    </button> 
+                                    <button title='Disable' class="btn btn-md btn-rounded btn-warning btn-icon" data-toggle="modal" data-target="#edit{{$user->id}}">
+                                        <i class="ti-pencil-alt"></i>
+                                    </button>
+
                                     @if($user->is_active == 1)
                                     <form method="POST" action="{{url('deactivate_user/'.$user->id)}}" class="d-inline-block">
                                         @csrf
-                                        <button type="button" class="btn btn-md btn-danger deactivate" title="Deactivate">
+                                        <button type="button" class="btn btn-icon btn-rounded btn-danger deactivate" title="Deactivate">
                                             <i class="ti-na"></i>
                                         </button>
                                     </form>
@@ -45,9 +44,8 @@
                                     @endif
                                 </td>
                                 <td>{{ $user->name }}</td>
-                                <td>{{ $user->username }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ $user->company_id }}</td>
+                                <td>{{ $user->role_id }}</td>
                                 <td>
                                     @if ($user->is_active == 1)
                                         <div class="badge badge-success">
@@ -64,6 +62,8 @@
                                     @endif
                                 </td>
                             </tr>
+
+                            @include('user.edit')
                             @endforeach
                         </tbody>
                     </table>
@@ -73,17 +73,16 @@
     </div>
 </div>
 
+
+@include('user.create')
+{{-- @foreach ($users as $user)
+@include('user.edit')
+@endforeach --}}
+@endsection
+
+@section('js')
 <script>
     $(document).ready(function() {
-        @if (session('success'))
-            Swal.fire({
-                title: 'Success!',
-                text: '{{ session('success') }}',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            });
-        @endif
-
         $('.deactivate').on('click', function() {
             var form = $(this).closest('form');
 
@@ -119,8 +118,4 @@
         })
     })
 </script>
-@include('user.create')
-{{-- @foreach ($users as $user)
-@include('user.edit')
-@endforeach --}}
 @endsection

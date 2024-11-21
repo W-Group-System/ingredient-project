@@ -252,6 +252,7 @@
                 processing: false,
                 serverSide: false,
                 ordering: false,
+                // dom: "rftip",
                 pageLength: 10,
             });
         });

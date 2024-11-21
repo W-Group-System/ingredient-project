@@ -1,15 +1,60 @@
 @extends('layouts.header')
 @section('content')
 <div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-3 grid-margin">
+            <div class="card mb-2">
+                <div class="card-body">
+                    <p class="card-title">Total User</p>
+                    <div class="d-flex justify-content-between">
+                        <div class="mb-4 mt-2">
+                            <h3 class="text-primary fs-30 font-weight-medium">
+                                {{ count($users) }}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 grid-margin">
+            <div class="card mb-2">
+                <div class="card-body">
+                    <p class="card-title">Total Active</p>
+                    <div class="d-flex justify-content-between">
+                        <div class="mb-4 mt-2">
+                            <h3 class="text-primary fs-30 font-weight-medium">
+                                {{ count($users->where('status', 'Active')) }}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 grid-margin">
+            <div class="card mb-2">
+                <div class="card-body">
+                    <p class="card-title">Total Inactive</p>
+                    <div class="d-flex justify-content-between">
+                        <div class="mb-4 mt-2">
+                            <h3 class="text-primary fs-30 font-weight-medium">
+                                {{ count($users->where('status', 'Inactive')) }}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title d-flex justify-content-between align-items-center">
                     Users
-                    <button type="button" class="btn btn-md btn-outline-primary" id="adduser" data-toggle="modal" data-target="#newUser">New</button>
+                    <button type="button" class="btn btn-md btn-outline-primary" id="adduser" data-toggle="modal"
+                        data-target="#newUser">New</button>
                 </h4>
-                <div class="table-responsive" >
-                    <table class="table table-striped table-bordered table-hover tablewithSearch" >
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover tablewithSearch">
                         <thead>
                             <tr>
                                 <th>Action</th>
@@ -21,23 +66,28 @@
                         </thead>
                         <tbody>
                             @foreach ($users as $user)
-                            <tr> 
-                                <td style="center">
-                                    <button title='Disable' class="btn btn-md btn-rounded btn-warning btn-icon" data-toggle="modal" data-target="#edit{{$user->id}}">
+                            <tr>
+                                <td>
+                                    <button title='Disable' class="btn btn-md btn-rounded btn-warning btn-icon"
+                                        data-toggle="modal" data-target="#edit{{$user->id}}">
                                         <i class="ti-pencil-alt"></i>
                                     </button>
 
-                                    @if($user->is_active == 1)
-                                    <form method="POST" action="{{url('deactivate_user/'.$user->id)}}" class="d-inline-block">
+                                    @if($user->status == 'Active')
+                                    <form method="POST" action="{{url('deactivate-user/'.$user->id)}}"
+                                        class="d-inline-block" onsubmit="show()">
                                         @csrf
-                                        <button type="button" class="btn btn-icon btn-rounded btn-danger deactivate" title="Deactivate">
+                                        <button type="button" class="btn btn-icon btn-rounded btn-danger deactivate"
+                                            title="Deactivate">
                                             <i class="ti-na"></i>
                                         </button>
                                     </form>
-                                    @elseif($user->status != "1")
-                                    <form method="POST" action="{{url('activate_user/'.$user->id)}}" class="d-inline-block">
+                                    @elseif($user->status != "Deactivate")
+                                    <form method="POST" action="{{url('activate-user/'.$user->id)}}"
+                                        class="d-inline-block" onsubmit="show()">
                                         @csrf
-                                        <button type="button" class="btn btn-md btn-info activate" title="Activate">
+                                        <button type="button" class="btn btn-icon btn-rounded btn-info activate"
+                                            title="Activate">
                                             <i class="ti-check"></i>
                                         </button>
                                     </form>
@@ -45,20 +95,16 @@
                                 </td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ $user->role_id }}</td>
+                                <td>{{$user->role}}</td>
                                 <td>
-                                    @if ($user->is_active == 1)
-                                        <div class="badge badge-success">
-                                            @if ($user->is_active == 1)
-                                                Active
-                                            @endif
-                                        </div>
-                                    @else 
-                                        <div class="badge badge-danger">
-                                            @if ($user->is_active != 1)
-                                                Inactive
-                                            @endif
-                                        </div>
+                                    @if ($user->status == 'Active')
+                                    <span class="badge badge-success">
+                                        {{$user->status}}
+                                    </span>
+                                    @else
+                                    <span class="badge badge-danger">
+                                        {{$user->status}}
+                                    </span>
                                     @endif
                                 </td>
                             </tr>
@@ -75,9 +121,6 @@
 
 
 @include('user.create')
-{{-- @foreach ($users as $user)
-@include('user.edit')
-@endforeach --}}
 @endsection
 
 @section('js')

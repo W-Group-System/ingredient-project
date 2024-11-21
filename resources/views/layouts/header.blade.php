@@ -163,7 +163,7 @@
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link" href="{{ url('/companies') }}">Company</a>
                                 </li>
-                                <li class="nav-item"> <a class="nav-link" href="{{ url('/roles') }}">Role</a></li>
+                                {{-- <li class="nav-item"> <a class="nav-link" href="{{ url('/roles') }}">Role</a></li> --}}
                                 <li class="nav-item"> <a class="nav-link" href="{{ url('/users') }}">User</a></li>
                             </ul>
                         </div>

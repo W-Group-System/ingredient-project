@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" enctype="multipart/form-data" action="{{ url('add-user') }}" onsubmit="show()">
+                <form method="POST" enctype="multipart/form-data" action="{{ url('update-user/'.$user->id) }}" onsubmit="show()">
                     @csrf
                     {{-- <div class="form-group row">
                         <label for="" class="col-sm-3 col-form-label">Username</label>
@@ -33,8 +33,8 @@
                         <div class="col-sm-9">
                             <select data-placeholder="Select role" name="role" class="form-control js-example-basic-single" style="width: 100%;" required>
                                 <option value=""></option>
-                                @foreach ($roles as $role)
-                                    <option value="{{$role->id}}">{{$role->name}}</option>
+                                @foreach ($roles as $key=>$value)
+                                    <option value="{{$key}}" @if($user->role == $key) selected @endif>{{$value}}</option>
                                 @endforeach
                             </select>
                         </div>

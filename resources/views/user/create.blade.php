@@ -46,8 +46,8 @@
                         <div class="col-sm-9">
                             <select data-placeholder="Select role" name="role" class="form-control js-example-basic-single" style="width: 100%;" required>
                                 <option value=""></option>
-                                @foreach ($roles as $role)
-                                    <option value="{{$role->id}}">{{$role->name}}</option>
+                                @foreach ($roles as $key=>$value)
+                                    <option value="{{$key}}">{{$value}}</option>
                                 @endforeach
                             </select>
                         </div>

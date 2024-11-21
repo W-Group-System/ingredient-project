@@ -113,6 +113,7 @@
                                 <li class="nav-item"> <a class="nav-link" href="{{ url('/reserved') }}">Reserved</a>
                                 </li>
                                 <li class="nav-item"> <a class="nav-link" href="{{ url('/profile') }}">Profile</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{ url('/ingredients') }}">Ingredients</a></li>
                             </ul>
                         </div>
                     </li>

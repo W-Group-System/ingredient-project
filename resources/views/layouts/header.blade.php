@@ -116,7 +116,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#orders" aria-expanded="false"
                             aria-controls="orders">
                             <i class="icon-layout menu-icon"></i>
@@ -135,7 +135,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#reports" aria-expanded="false"
                             aria-controls="reports">
@@ -161,8 +161,8 @@
                         </a>
                         <div class="collapse" id="setup">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="{{ url('/companies') }}">Company</a>
-                                </li>
+                                {{-- <li class="nav-item"> <a class="nav-link" href="{{ url('/companies') }}">Company</a>
+                                </li> --}}
                                 {{-- <li class="nav-item"> <a class="nav-link" href="{{ url('/roles') }}">Role</a></li> --}}
                                 <li class="nav-item"> <a class="nav-link" href="{{ url('/users') }}">User</a></li>
                             </ul>

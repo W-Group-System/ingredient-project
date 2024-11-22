@@ -1,6 +1,6 @@
 @extends('layouts.header')
 @section('content')
-<div class="content-wrapper">
+<div class="col-lg-12 grid-margin stretch-card">
 
     {{-- <div class="row">
         <div class="col-md-4 grid-margin">

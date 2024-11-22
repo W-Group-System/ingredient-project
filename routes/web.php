@@ -76,6 +76,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('activate-user/{id}', 'UserController@activate');
 
     # Ingredients
-    Route::get('ingredients', 'IngredientsController@index');    
+    Route::get('ingredients', 'IngredientsController@index');   
+    
+    # Shipment
+    Route::get('shipments', 'ShipmentController@index');
 });
 

@@ -47,11 +47,11 @@
                                 <tr>
                                     <td>
                                         <button title="Edit" type="button" class="btn btn-info btn-rounded btn-icon" data-toggle="modal" data-target="#edit{{$reserve->id}}">
-                                            <i class="ti-pencil-alt"></i>
+                                            <i class="ti-pencil-alt" style="margin: -3px;"></i>
                                         </button>
 
                                         <button type="button" class="btn btn-danger btn-rounded btn-icon">
-                                            <i class="ti-trash"></i>
+                                            <i class="ti-trash" style="margin: -3px;"></i>
                                         </button>
                                     </td>
                                     <td>{{$reserve->ingredient}}</td>

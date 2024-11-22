@@ -174,7 +174,7 @@
             <!-- partial -->
             <div class="main-panel">
                 <div class="loader" style="display: none;" id="loader"></div>
-                <div class="content-wrapper">
+                <div class="content-wrapper" style="background: #F5F7FF;">
                     @yield('content')
                 </div>
                 <!-- content-wrapper ends -->
@@ -232,7 +232,7 @@
 
     <script src="{{ asset('/body_css/js/tabs.js') }}"></script>
     {{-- <script src="{{ asset('/body_css/js/form-repeater.js') }}"></script> --}}
-    <script src="{{ asset('/body_css/vendors/sweetalert/sweetalert.min.js') }}"></script>
+    {{-- <script src="{{ asset('/body_css/vendors/sweetalert/sweetalert.min.js') }}"></script> --}}
 
     <script src="{{ asset('/body_css/vendors/inputmask/jquery.inputmask.bundle.js') }}"></script>
     <script src="{{ asset('/body_css/vendors/inputmask/jquery.inputmask.bundle.js') }}"></script>
@@ -253,7 +253,7 @@
                 processing: false,
                 serverSide: false,
                 ordering: false,
-                // dom: "rftip",
+                dom: 'Bfrtip',
                 pageLength: 10,
             });
         });

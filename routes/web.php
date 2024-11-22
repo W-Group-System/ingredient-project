@@ -39,8 +39,10 @@ Route::group(['middleware' => 'auth'], function () {
     // Outbound Ingredients
     Route::get('/outbound','IngredientsController@outbound_ingredient');
 
-    // Reserved Ingredients
-    Route::get('/reserved','IngredientsController@reserved_ingredient');
+    # Reserved
+    Route::get('/reserved','ReservedController@index');
+    Route::post('add-reserved','ReservedController@store');
+    Route::post('update-reserved/{id}','ReservedController@update');
     // Ingredients Profile
     Route::get('/profile','IngredientsController@ingredient_profile');
 
@@ -74,6 +76,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('activate-user/{id}', 'UserController@activate');
 
     # Ingredients
-    Route::get('ingredients', 'IngredientsController@index');
+    Route::get('ingredients', 'IngredientsController@index');    
 });
 

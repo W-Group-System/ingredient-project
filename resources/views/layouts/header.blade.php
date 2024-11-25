@@ -39,6 +39,11 @@
         opacity: .8;
         background-size:120px 120px;
     }
+    
+    .card-header-radius {
+        border-top-right-radius:20px !important; 
+        border-top-left-radius: 20px !important;
+    }
 </style>
 
 <body>
@@ -46,8 +51,8 @@
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo" href="{{url('home')}}"><img src="{{asset('img/wgroup.png')}}" class="mr-2" alt="logo" style="height: 8vh;"/></a>
-                <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{asset('img/wgroup.png')}}" alt="logo" /></a>
+                <a class="navbar-brand brand-logo" href="{{url('home')}}"><img src="{{asset('img/whi.png')}}" class="mr-2" alt="logo" style="height: 5vh;"/></a>
+                <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{asset('img/whi.png')}}" alt="logo" /></a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
                 <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -95,25 +100,21 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#ingredients" aria-expanded="false"
+                        <a class="nav-link" data-toggle="collapse" href="#ingredientsMenu" aria-expanded="false"
                             aria-controls="ingredients">
                             <i class="icon-layout menu-icon"></i>
                             <span class="menu-title">Ingredients</span>
                             <i class="menu-arrow"></i>
                         </a>
-                        <div class="collapse" id="ingredients">
+                        <div class="collapse" id="ingredientsMenu">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="{{ url('/ingredient_dashboard') }}">Dashboard</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="{{ url('/available') }}">Available</a>
-                                </li>
+                                <li class="nav-item"> <a class="nav-link" href="{{ url('/ingredient_dashboard') }}">Dashboard</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{ url('/available') }}">Available</a></li>
                                 <li class="nav-item"> <a class="nav-link" href="{{ url('/inbound') }}">Inbound</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="{{ url('/outbound') }}">Outbound</a>
-                                </li>
-                                <li class="nav-item"> <a class="nav-link" href="{{ url('/reserved') }}">Reserved</a>
-                                </li>
+                                <li class="nav-item"> <a class="nav-link" href="{{ url('/outbound') }}">Outbound</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{ url('/reserved') }}">Reserved</a></li>
                                 <li class="nav-item"> <a class="nav-link" href="{{ url('/profile') }}">Profile</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="{{ url('/ingredients') }}">Ingredients</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{ url('/ingredient') }}">Ingredient</a></li>
                                 <li class="nav-item"> <a class="nav-link" href="{{ url('/shipments') }}">Shipments</a></li>
                             </ul>
                         </div>

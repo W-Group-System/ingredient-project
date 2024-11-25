@@ -31,7 +31,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/ingredient_dashboard','IngredientsController@ingredient_dashboard');
 
     // Available Ingredients
-    Route::get('/available','IngredientsController@available_ingredient');
+    Route::get('/available','AvailableController@index');
 
     // Inbound Ingredients
     Route::get('/inbound','IngredientsController@inbound_ingredient');
@@ -76,9 +76,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('activate-user/{id}', 'UserController@activate');
 
     # Ingredients
-    Route::get('ingredients', 'IngredientsController@index');   
+    Route::get('ingredient', 'IngredientsController@index');   
     
     # Shipment
     Route::get('shipments', 'ShipmentController@index');
+    Route::get('shipment-export', 'ShipmentController@shipmentExport');
+    Route::post('shipment-import', 'ShipmentController@shipmentImport');
 });
 

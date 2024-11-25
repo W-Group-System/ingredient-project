@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ShipmentExport;
+use App\Imports\ShipmentImport;
+use App\Shipment;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use RealRashid\SweetAlert\Facades\Alert;
+use Shuchkin\SimpleXLSX;
 
 class ShipmentController extends Controller
 {
@@ -13,7 +19,9 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-        return view('shipments.index');
+        $shipments = Shipment::get();
+
+        return view('shipments.index', compact('shipments'));
     }
 
     /**
@@ -80,5 +88,47 @@ class ShipmentController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function shipmentExport()
+    {
+        return Excel::download(new ShipmentExport, 'Shipment Export Template.xlsx');
+    }
+
+    public function shipmentImport(Request $request)
+    {
+        $file = $request->file('upload_shipments');
+
+        $xlsx = SimpleXLSX::parse($file);
+
+        foreach($xlsx->rows() as $key=>$rows)
+        {
+            if ($key != 0)
+            {
+                $shipments = Shipment::where('so_no', $rows[0])->first();
+                if (empty($shipments))
+                {
+                    $shipments = new Shipment;
+                    $shipments->so_no = $rows[0];
+                    $shipments->buyer_code = $rows[1];
+                    $shipments->qty = $rows[2];
+                    $shipments->product = $rows[3];
+                    $shipments->load_date = date('Y-m-d', strtotime($rows[4]));
+                    $shipments->save();
+                }
+                else
+                {
+                    $shipments->so_no = $rows[0];
+                    $shipments->buyer_code = $rows[1];
+                    $shipments->qty = $rows[2];
+                    $shipments->product = $rows[3];
+                    $shipments->load_date = date('Y-m-d', strtotime($rows[4]));
+                    $shipments->save();
+                }
+            }
+        }
+
+        Alert::success('Successfully Imported')->persistent('Dismiss');
+        return back();
     }
 }

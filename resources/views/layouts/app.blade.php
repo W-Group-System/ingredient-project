@@ -40,7 +40,7 @@
 
 <style>
     .control input:checked ~ .control__indicator {
-        background: #3f3e91 !important;
+        background: #57B657 !important;
     }
     .loader {
         position: fixed;

@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" enctype="multipart/form-data" action="{{ url('') }}" onsubmit="show()">
+            <form method="POST" enctype="multipart/form-data" action="{{ url('shipment-import') }}" onsubmit="show()" enctype="multipart/form-data">
                 <div class="modal-body">
                     @csrf
 

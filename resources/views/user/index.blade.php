@@ -59,7 +59,7 @@
                                 <td>
                                     <button title='Disable' class="btn btn-md btn-rounded btn-info btn-icon"
                                         data-toggle="modal" data-target="#edit{{$user->id}}">
-                                        <i class="ti-pencil-alt"></i>
+                                        <i class="ti-pencil-alt" style="margin-left: -3px;"></i>
                                     </button>
     
                                     @if($user->status == 'Active')
@@ -68,7 +68,7 @@
                                         @csrf
                                         <button type="button" class="btn btn-icon btn-rounded btn-danger deactivate"
                                             title="Deactivate">
-                                            <i class="ti-na"></i>
+                                            <i class="ti-na" style="margin-left: -3px;"></i>
                                         </button>
                                     </form>
                                     @elseif($user->status != "Deactivate")
@@ -77,7 +77,7 @@
                                         @csrf
                                         <button type="button" class="btn btn-icon btn-rounded btn-success activate"
                                             title="Activate">
-                                            <i class="ti-check"></i>
+                                            <i class="ti-check" style="margin-left: -3px;"></i>
                                         </button>
                                     </form>
                                     @endif

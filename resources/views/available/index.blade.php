@@ -14,11 +14,14 @@
 </div>
 <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title d-flex justify-content-between align-items-center">
+        <div class="card border border-1 border-primary">
+            <div class="card-header bg-primary card-header-radius">
+                <p class="card-title m-0 text-white">
                     Available
-                </h4>
+                </p>
+            </div>
+            <div class="card-body">
+                
                 <div class="table-responsive" >
                     <table class="table table-striped table-bordered table-hover tablewithSearch" >
                         <thead>
@@ -31,18 +34,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr> 
-                                {{-- <td style="center">
-                                    <button type="button" class="btn btn-primary btn-rounded btn-icon"
-                                        data-target="#NewOrdersView" data-toggle="modal" title='View'>
-                                    <i class="ti-eye"></i>
-                                </button> 
-                                </td> --}}
-                                <td>Ricogel 82144</td>
-                                <td>Sample Product Name</td>
-                                <td>14,000</td>
-                                <td>January 10, 2024</td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>

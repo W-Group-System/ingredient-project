@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Shipment;
+use App\Reserved;
 use Illuminate\Http\Request;
 
-class AvailableController extends Controller
+class OutboundController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class AvailableController extends Controller
      */
     public function index()
     {
-        $available = Shipment::get();
+        $reserved = Reserved::get();
 
-        return view('available.index', compact('available'));
+        return view('outbound.index', compact('reserved'));
     }
 
     /**

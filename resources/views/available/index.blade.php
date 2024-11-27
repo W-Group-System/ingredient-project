@@ -26,15 +26,23 @@
                     <table class="table table-striped table-bordered table-hover tablewithSearch" >
                         <thead>
                             <tr>
-                                {{-- <th>Action</th> --}}
-                                <th>Ingredients Name</th>
-                                <th>Type</th>
-                                <th>Quantity</th>
-                                <th>Last Restock Date</th>
+                                <th>SO No.</th>
+                                <th>Buyer Code</th>
+                                <th>Qty</th>
+                                <th>Product</th>
+                                <th>Load Date</th>
                             </tr>
                         </thead>
                         <tbody>
-                            
+                            @foreach ($available as $a)
+                                <tr>
+                                    <td>{{$a->so_no}}</td>
+                                    <td>{{$a->buyer_code}}</td>
+                                    <td>{{$a->qty}}</td>
+                                    <td>{{$a->product}}</td>
+                                    <td>{{date('M d, Y', strtotime($a->load_date))}}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

@@ -34,7 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/available','AvailableController@index');
 
     // Inbound Ingredients
-    Route::get('/inbound','IngredientsController@inbound_ingredient');
+    Route::get('/inbound','InboundController@index');
 
     // Outbound Ingredients
     Route::get('/outbound','OutboundController@index');

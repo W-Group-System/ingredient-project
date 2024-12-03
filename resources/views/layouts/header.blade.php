@@ -108,7 +108,7 @@
                         </a>
                         <div class="collapse" id="ingredientsMenu">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="{{ url('/ingredient_dashboard') }}">Dashboard</a></li>
+                                {{-- <li class="nav-item"> <a class="nav-link" href="{{ url('/ingredient_dashboard') }}">Dashboard</a></li> --}}
                                 <li class="nav-item"> <a class="nav-link" href="{{ url('/available') }}">Available</a></li>
                                 <li class="nav-item"> <a class="nav-link" href="{{ url('/shipments') }}">Inbound</a></li>
                                 <li class="nav-item"> <a class="nav-link" href="{{ url('/outbound') }}">Outbound</a></li>

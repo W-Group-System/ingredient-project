@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Ingredient;
 use App\Shipment;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class AvailableController extends Controller
      */
     public function index()
     {
-        $available = Shipment::get();
+        $available = Ingredient::get();
 
         return view('available.index', compact('available'));
     }

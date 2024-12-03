@@ -26,21 +26,21 @@
                     <table class="table table-striped table-bordered table-hover tablewithSearch" >
                         <thead>
                             <tr>
-                                <th>SO No.</th>
-                                <th>Buyer Code</th>
-                                <th>Qty</th>
-                                <th>Product</th>
-                                <th>Load Date</th>
+                                <th class="p-2">SO No.</th>
+                                <th class="p-2">Buyer Code</th>
+                                <th class="p-2">Qty</th>
+                                <th class="p-2">Product</th>
+                                <th class="p-2">Load Date</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($available as $a)
+                            @foreach ($available->where('so_number','!=',null) as $a)
                                 <tr>
-                                    <td>{{$a->so_no}}</td>
-                                    <td>{{$a->buyer_code}}</td>
-                                    <td>{{$a->qty}}</td>
-                                    <td>{{$a->product}}</td>
-                                    <td>{{date('M d, Y', strtotime($a->load_date))}}</td>
+                                    <td class="p-2">{{$a->so_number}}</td>
+                                    <td class="p-2">{{$a->buyers_code}}</td>
+                                    <td class="p-2">{{$a->qty}}</td>
+                                    <td class="p-2">{{$a->product_code}}</td>
+                                    <td class="p-2">{{date('M d, Y', strtotime($a->load_date))}}</td>
                                 </tr>
                             @endforeach
                         </tbody>

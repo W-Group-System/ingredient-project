@@ -34,12 +34,10 @@
                             <thead>
                                 <tr>
                                     <th class="p-2">Actions</th>
-                                    <th class="p-2">Ingredient</th>
-                                    <th class="p-2">Inventory (KG)</th>
-                                    <th class="p-2">Booked Orders</th>
-                                    <th class="p-2">Qty (KG)</th>
+                                    <th class="p-2">Buyers Code</th>
                                     <th class="p-2">Product Code</th>
-                                    <th class="p-2">Ingredient Qty (KG)</th>
+                                    <th class="p-2">Qty</th>
+                                    <th class="p-2">Load Date</th>
                                     <th class="p-2">Status</th>
                                 </tr>
                             </thead>
@@ -59,20 +57,18 @@
                                                 </button>
                                             </form>
                                         </td>
-                                        <td class="p-2">{{$reserve->ingredient}}</td>
-                                        <td class="p-2">{{$reserve->inventory}}</td>
-                                        <td class="p-2">{{$reserve->book_orders}}</td>
-                                        <td class="p-2">{{$reserve->qty}}</td>
-                                        <td class="p-2">{{$reserve->product_code}}</td>
-                                        <td class="p-2">{{$reserve->ingredient_qty}}</td>
-                                        <td class="p-2">
+                                        <td>{{$reserve->buyers_code}}</td>
+                                        <td>{{$reserve->product_code}}</td>
+                                        <td>{{$reserve->qty}}</td>
+                                        <td>{{date('Y-m-d', strtotime($reserve->load_date))}}</td>
+                                        <td>
                                             @if($reserve->status == 'Reserved')
                                             <span class="badge badge-success">
                                             @elseif($reserve->status == 'Cancelled')
                                             <span class="badge badge-danger">
-                                            @endif    
+                                            @endif
 
-                                            {{$reserve->status}}
+                                                {{$reserve->status}}
                                             </span>
                                         </td>
                                     </tr>

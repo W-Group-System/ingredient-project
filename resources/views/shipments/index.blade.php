@@ -18,7 +18,7 @@
                     <p class="text-white">Total Inbound</p>
                 </div>
                 <div class="card-body">
-                    <p class="fs-30 mb-2">{{count($shipments)}}</p>
+                    <p class="fs-30 mb-2">{{count($shipments->where('so_number','!=',null))}}</p>
                 </div>
             </div>
         </div>
@@ -51,12 +51,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($shipments as $shipment)
+                                @foreach ($shipments->where('so_number','!=',null) as $shipment)
                                     <tr>
-                                        <td class="p-2">{{$shipment->so_no}}</td>
-                                        <td class="p-2">{{$shipment->buyer_code}}</td>
+                                        <td class="p-2">{{$shipment->so_number}}</td>
+                                        <td class="p-2">{{$shipment->buyers_code}}</td>
                                         <td class="p-2">{{$shipment->qty}}</td>
-                                        <td class="p-2">{{$shipment->product}}</td>
+                                        <td class="p-2">{{$shipment->product_code}}</td>
                                         <td class="p-2">{{date('M d, Y', strtotime($shipment->load_date))}}</td>
                                     </tr>
                                 @endforeach

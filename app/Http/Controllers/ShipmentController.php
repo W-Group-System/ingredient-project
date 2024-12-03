@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\ShipmentExport;
 use App\Imports\ShipmentImport;
-use App\Shipment;
+use App\Ingredient;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -19,7 +19,7 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-        $shipments = Shipment::get();
+        $shipments = Ingredient::get();
 
         return view('shipments.index', compact('shipments'));
     }
@@ -105,23 +105,23 @@ class ShipmentController extends Controller
         {
             if ($key != 0)
             {
-                $shipments = Shipment::where('so_no', $rows[0])->first();
+                $shipments = Ingredient::where('so_number', $rows[0])->first();
                 if (empty($shipments))
                 {
-                    $shipments = new Shipment;
-                    $shipments->so_no = $rows[0];
-                    $shipments->buyer_code = $rows[1];
+                    $shipments = new Ingredient;
+                    $shipments->so_number = $rows[0];
+                    $shipments->buyers_code = $rows[1];
                     $shipments->qty = $rows[2];
-                    $shipments->product = $rows[3];
+                    $shipments->product_code = $rows[3];
                     $shipments->load_date = date('Y-m-d', strtotime($rows[4]));
                     $shipments->save();
                 }
                 else
                 {
-                    $shipments->so_no = $rows[0];
-                    $shipments->buyer_code = $rows[1];
+                    $shipments->so_number = $rows[0];
+                    $shipments->buyers_code = $rows[1];
                     $shipments->qty = $rows[2];
-                    $shipments->product = $rows[3];
+                    $shipments->product_code = $rows[3];
                     $shipments->load_date = date('Y-m-d', strtotime($rows[4]));
                     $shipments->save();
                 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Ingredient;
 use App\Reserved;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -15,7 +16,7 @@ class ReservedController extends Controller
      */
     public function index()
     {
-        $reserved = Reserved::get();
+        $reserved = Ingredient::get();
 
         return view('reserved.index', compact('reserved'));
     }
@@ -38,13 +39,11 @@ class ReservedController extends Controller
      */
     public function store(Request $request)
     {
-        $reserved = new Reserved;
-        $reserved->ingredient = $request->ingredient;
-        $reserved->inventory = $request->inventory;
-        $reserved->book_orders = $request->booked_orders;
+        $reserved = new Ingredient;
+        $reserved->buyers_code = $request->buyers_code;
         $reserved->qty = $request->qty;
         $reserved->product_code = $request->product_code;
-        $reserved->ingredient_qty = $request->ingredient_qty;
+        $reserved->load_date = $request->load_date;
         $reserved->status = 'Reserved';
         $reserved->save();
 
@@ -83,13 +82,11 @@ class ReservedController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $reserved = Reserved::findOrFail($id);
-        $reserved->ingredient = $request->ingredient;
-        $reserved->inventory = $request->inventory;
-        $reserved->book_orders = $request->booked_orders;
+        $reserved = Ingredient::findOrFail($id);
+        $reserved->buyers_code = $request->buyers_code;
         $reserved->qty = $request->qty;
         $reserved->product_code = $request->product_code;
-        $reserved->ingredient_qty = $request->ingredient_qty;
+        $reserved->load_date = $request->load_date;
         $reserved->save();
 
         Alert::success('Successfully Updated')->persistent('Dismiss');
@@ -104,7 +101,7 @@ class ReservedController extends Controller
      */
     public function destroy($id)
     {
-        $reserved = Reserved::findOrFail($id);
+        $reserved = Ingredient::findOrFail($id);
         $reserved->status = 'Cancelled';
         $reserved->save();
         

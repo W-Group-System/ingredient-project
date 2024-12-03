@@ -9,28 +9,20 @@
 
                 <div class="modal-body">
                     <div class="form-group mb-2">
-                        Ingredient
-                        <input type="text" name="ingredient" class="form-control" required>
-                    </div>
-                    <div class="form-group mb-2">
-                        Inventory (KG)
-                        <input type="text" name="inventory" class="form-control" required>
-                    </div>
-                    <div class="form-group mb-2">
-                        Booked Orders
-                        <input type="text" name="booked_orders" class="form-control" required>
-                    </div>
-                    <div class="form-group mb-2">
-                        Qty (KG)
-                        <input type="text" name="qty" class="form-control" required>
+                        Buyers Code
+                        <input type="text" name="buyers_code" class="form-control" required>
                     </div>
                     <div class="form-group mb-2">
                         Product Code
                         <input type="text" name="product_code" class="form-control" required>
                     </div>
                     <div class="form-group mb-2">
-                        Ingredient Qty (KG)
-                        <input type="text" name="ingredient_qty" class="form-control" required>
+                        Qty
+                        <input type="number" name="qty" class="form-control" required>
+                    </div>
+                    <div class="form-group mb-2">
+                        Load Date
+                        <input type="date" name="load_date" class="form-control" required>
                     </div>
                 </div>
                 <div class="modal-footer">

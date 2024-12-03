@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Reserved;
+use App\Ingredient;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class OutboundController extends Controller
 {
@@ -14,9 +15,9 @@ class OutboundController extends Controller
      */
     public function index()
     {
-        $reserved = Reserved::get();
+        $outbound = Ingredient::get();
 
-        return view('outbound.index', compact('reserved'));
+        return view('outbound.index', compact('outbound'));
     }
 
     /**
@@ -71,7 +72,12 @@ class OutboundController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $outbound = Ingredient::findOrFail($id);
+        $outbound->so_number = $request->so_number;
+        $outbound->save();
+
+        Alert::success('Successfully Added SO Number')->persistent('Dismiss');
+        return back();
     }
 
     /**

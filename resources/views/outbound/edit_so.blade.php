@@ -7,16 +7,20 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    SO Number
-                    <input type="text" name="so_no" class="form-control" required>
+            <form method="POST" action="{{url('update-so_number/'.$res->id)}}" onsubmit="show()">
+                @csrf 
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        SO Number
+                        <input type="text" name="so_number" class="form-control" required>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-                <button class="btn btn-success" type="submit">Save</button>
-            </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                    <button class="btn btn-success" type="submit">Save</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

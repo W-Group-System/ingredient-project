@@ -7,7 +7,7 @@
                 <p class="text-white">Total Available</p>
             </div>
             <div class="card-body">
-                <p class="fs-30 mb-2">0</p>
+                <p class="fs-30 mb-2">{{count($available->where('so_number','!=',null))}}</p>
             </div>
         </div>
     </div>

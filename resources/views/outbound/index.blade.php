@@ -7,7 +7,7 @@
                 <p class="text-white">Total Outbound</p>
             </div>
             <div class="card-body">
-                <p class="fs-30 mb-2">{{count($outbound->where('status','Reserved'))}}</p>
+                <p class="fs-30 mb-2">{{count($outbound->where('status','Reserved')->where('so_number',null))}}</p>
             </div>
         </div>
     </div>

@@ -33,33 +33,48 @@
                         <table class="table table-bordered table-striped table-hover tablewithSearch">
                             <thead>
                                 <tr>
-                                    <th>Actions</th>
-                                    <th>Ingredient</th>
-                                    <th>Inventory (KG)</th>
-                                    <th>Booked Orders</th>
-                                    <th>Qty (KG)</th>
-                                    <th>Product Code</th>
-                                    <th>Ingredient Qty (KG)</th>
+                                    <th class="p-2">Actions</th>
+                                    <th class="p-2">Ingredient</th>
+                                    <th class="p-2">Inventory (KG)</th>
+                                    <th class="p-2">Booked Orders</th>
+                                    <th class="p-2">Qty (KG)</th>
+                                    <th class="p-2">Product Code</th>
+                                    <th class="p-2">Ingredient Qty (KG)</th>
+                                    <th class="p-2">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($reserved as $reserve)
                                     <tr>
-                                        <td>
+                                        <td class="p-2">
                                             <button title="Edit" type="button" class="btn btn-info btn-rounded btn-icon" data-toggle="modal" data-target="#edit{{$reserve->id}}">
                                                 <i class="ti-pencil-alt" style="margin: -3px;"></i>
                                             </button>
     
-                                            <button type="button" class="btn btn-danger btn-rounded btn-icon">
-                                                <i class="ti-trash" style="margin: -3px;"></i>
-                                            </button>
+                                            <form method="POST" id="cancelForm{{$reserve->id}}" class="d-inline-block" action="{{url('cancel-reserved/'.$reserve->id)}}" onsubmit="show()">
+                                                
+                                                @csrf 
+                                                <button title="Cancel" type="button" class="btn btn-danger btn-rounded btn-icon d-inline-block" onclick="cancel({{$reserve->id}})">
+                                                    <i class="ti-na" style="margin: -3px;"></i>
+                                                </button>
+                                            </form>
                                         </td>
-                                        <td>{{$reserve->ingredient}}</td>
-                                        <td>{{$reserve->inventory}}</td>
-                                        <td>{{$reserve->book_orders}}</td>
-                                        <td>{{$reserve->qty}}</td>
-                                        <td>{{$reserve->product_code}}</td>
-                                        <td>{{$reserve->ingredient_qty}}</td>
+                                        <td class="p-2">{{$reserve->ingredient}}</td>
+                                        <td class="p-2">{{$reserve->inventory}}</td>
+                                        <td class="p-2">{{$reserve->book_orders}}</td>
+                                        <td class="p-2">{{$reserve->qty}}</td>
+                                        <td class="p-2">{{$reserve->product_code}}</td>
+                                        <td class="p-2">{{$reserve->ingredient_qty}}</td>
+                                        <td class="p-2">
+                                            @if($reserve->status == 'Reserved')
+                                            <span class="badge badge-success">
+                                            @elseif($reserve->status == 'Cancelled')
+                                            <span class="badge badge-danger">
+                                            @endif    
+
+                                            {{$reserve->status}}
+                                            </span>
+                                        </td>
                                     </tr>
     
                                     @include('reserved.edit_reserved')
@@ -76,7 +91,26 @@
 @endsection
 
 @section('js')
-    <script>
-        
-    </script>
+<script>
+    function cancel(id)
+    {
+        var form = $("#cancelForm"+id)
+
+        Swal.fire({
+            title: "Are you sure?",
+            // text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, cancel it!",
+            cancelButtonText: "No"
+        }).then((result) => {
+            if (result.isConfirmed)
+            {
+                form.submit();
+            }
+        });
+    }
+</script>
 @endsection

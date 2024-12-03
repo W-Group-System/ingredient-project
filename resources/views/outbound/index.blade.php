@@ -37,13 +37,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($reserved as $res)
+                            {{-- @foreach ($reserved as $res)
                                 <tr> 
                                     <td>
-                                        {{-- <button type="button" class="btn btn-primary btn-rounded btn-icon"
-                                            data-target="#OutboundView" data-toggle="modal" title='View'>
-                                                <i class="ti-eye"></i>
-                                        </button>  --}}
 
                                         <button type="button" title="Edit" class="btn btn-info btn-rounded btn-icon" data-toggle="modal" data-target="#edit{{$res->id}}">
                                             <i class="ti-pencil-alt text-center"></i>
@@ -58,7 +54,7 @@
                                 </tr>
 
                                 @include('outbound.edit_so')
-                            @endforeach
+                            @endforeach --}}
                         </tbody>
                     </table>
                 </div>

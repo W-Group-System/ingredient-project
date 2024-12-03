@@ -2,10 +2,20 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-3 mb-4 stretch-card">
+        {{-- <div class="col-md-3 mb-4 stretch-card">
             <div class="card border border-1 border-primary">
                 <div class="card-header bg-primary" style="border-top-left-radius: 20px; border-top-right-radius:20px;">
                     <p class="text-white">Total Shipment</p>
+                </div>
+                <div class="card-body">
+                    <p class="fs-30 mb-2">{{count($shipments)}}</p>
+                </div>
+            </div>
+        </div> --}}
+        <div class="col-md-3 mb-4 stretch-card">
+            <div class="card border border-1 border-primary">
+                <div class="card-header bg-primary" style="border-top-left-radius: 20px; border-top-right-radius:20px;">
+                    <p class="text-white">Total Inbound</p>
                 </div>
                 <div class="card-body">
                     <p class="fs-30 mb-2">{{count($shipments)}}</p>
@@ -33,21 +43,21 @@
                         <table class="table table-bordered table-striped table-bordered tablewithSearch">
                             <thead>
                                 <tr>
-                                    <th>SO No.</th>
-                                    <th>Buyer Code</th>
-                                    <th>Qty</th>
-                                    <th>Product</th>
-                                    <th>Load Date</th>
+                                    <th class="p-2">SO No.</th>
+                                    <th class="p-2">Buyer Code</th>
+                                    <th class="p-2">Qty</th>
+                                    <th class="p-2">Product</th>
+                                    <th class="p-2">Load Date</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($shipments as $shipment)
                                     <tr>
-                                        <td>{{$shipment->so_no}}</td>
-                                        <td>{{$shipment->buyer_code}}</td>
-                                        <td>{{$shipment->qty}}</td>
-                                        <td>{{$shipment->product}}</td>
-                                        <td>{{date('M d, Y', strtotime($shipment->load_date))}}</td>
+                                        <td class="p-2">{{$shipment->so_no}}</td>
+                                        <td class="p-2">{{$shipment->buyer_code}}</td>
+                                        <td class="p-2">{{$shipment->qty}}</td>
+                                        <td class="p-2">{{$shipment->product}}</td>
+                                        <td class="p-2">{{date('M d, Y', strtotime($shipment->load_date))}}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -14,7 +14,7 @@
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="{{ asset('/body_css/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
     <link rel="stylesheet" href="{{ asset('/body_css/vendors/ti-icons/css/themify-icons.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('/body_css/js/select.dataTables.min.css') }}">
+    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('/body_css/js/select.dataTables.min.css') }}"> --}}
     <!-- Plugin css for this page -->
     <link rel="stylesheet" href="{{ asset('/body_css/vendors/select2/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/body_css/vendors/select2-bootstrap-theme/select2-bootstrap.min.css') }}">
@@ -110,12 +110,12 @@
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link" href="{{ url('/ingredient_dashboard') }}">Dashboard</a></li>
                                 <li class="nav-item"> <a class="nav-link" href="{{ url('/available') }}">Available</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="{{ url('/inbound') }}">Inbound</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{ url('/shipments') }}">Inbound</a></li>
                                 <li class="nav-item"> <a class="nav-link" href="{{ url('/outbound') }}">Outbound</a></li>
                                 <li class="nav-item"> <a class="nav-link" href="{{ url('/reserved') }}">Reserved</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="{{ url('/profile') }}">Profile</a></li>
+                                {{-- <li class="nav-item"> <a class="nav-link" href="{{ url('/profile') }}">Profile</a></li> --}}
                                 <li class="nav-item"> <a class="nav-link" href="{{ url('/ingredient') }}">Ingredient</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="{{ url('/shipments') }}">Shipments</a></li>
+                                {{-- <li class="nav-item"> <a class="nav-link" href="{{ url('/shipments') }}">Shipments</a></li> --}}
                             </ul>
                         </div>
                     </li>
@@ -229,8 +229,8 @@
     <script src="{{ asset('/body_css/js/off-canvas.js') }}"></script>
     <script src="{{ asset('/body_css/js/hoverable-collapse.js') }}"></script>
     <script src="{{ asset('/body_css/js/template.js') }}"></script>
-    <script src="{{ asset('/body_css/js/settings.js') }}"></script>
-    <script src="{{ asset('/body_css/js/todolist.js') }}"></script>
+    {{-- <script src="{{ asset('/body_css/js/settings.js') }}"></script> --}}
+    {{-- <script src="{{ asset('/body_css/js/todolist.js') }}"></script> --}}
 
     <script src="{{ asset('/body_css/js/tabs.js') }}"></script>
     {{-- <script src="{{ asset('/body_css/js/form-repeater.js') }}"></script> --}}

@@ -45,6 +45,7 @@ class ReservedController extends Controller
         $reserved->qty = $request->qty;
         $reserved->product_code = $request->product_code;
         $reserved->ingredient_qty = $request->ingredient_qty;
+        $reserved->status = 'Reserved';
         $reserved->save();
 
         Alert::success('Successfully Saved')->persistent('Dismiss');
@@ -103,6 +104,11 @@ class ReservedController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $reserved = Reserved::findOrFail($id);
+        $reserved->status = 'Cancelled';
+        $reserved->save();
+        
+        Alert::success('Successfully Cancelled')->persistent('Dismiss');
+        return back();
     }
 }

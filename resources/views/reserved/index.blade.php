@@ -8,7 +8,7 @@
                     <p class="text-white">Total Reserved</p>
                 </div>
                 <div class="card-body">
-                    <p class="fs-30 mb-2">{{count($reserved)}}</p>
+                    <p class="fs-30 mb-2">{{count($reserved->where('status','!=',null))}}</p>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($reserved as $reserve)
+                                @foreach ($reserved->where('status','!=',null) as $reserve)
                                     <tr>
                                         <td class="p-2">
                                             <button title="Edit" type="button" class="btn btn-info btn-rounded btn-icon" data-toggle="modal" data-target="#edit{{$reserve->id}}">

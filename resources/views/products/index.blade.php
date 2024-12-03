@@ -20,33 +20,22 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover tablewithSearch" id="sample_request_table">
+                    <table class="table table-striped table-bordered table-hover tablewithSearch" id="sample_request_table" style="table-layout: fixed;">
                         <thead>
                             <tr>
-                                {{-- <th>Action</th> --}}
-                                <th>Product Code</th>
-                                <th>Category</th>
+                                <th class="p-2">Product Code</th>
+                                <th class="p-2">Raw Materials</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (collect($products)->sortByDesc('id') as $product)
                             <tr>
-                                {{-- <td>
-                                    <button type="button" class="btn btn-primary btn-rounded btn-icon"
-                                        data-target="#ProductComposition{{ $product->id }}" data-toggle="modal"
-                                        title='View'>
-                                        <i class="ti-eye"></i>
-                                    </button>
-                                </td> --}}
-                                <td>{{ $product->code }}</td>
-                                <td>
-                                    @if($product->type == 1)
-                                    Pure
-                                    @else
-                                    Blend
-                                    @endif
+                                <td class="p-2">{{ $product->product }}</td>
+                                <td class="p-2">
+                                    @foreach ($product->material_name as $raw_mats)
+                                        {{$raw_mats}} <br>
+                                    @endforeach
                                 </td>
-                                {{-- <td>Ricogel 82144</td> --}}
                             </tr>
                             @endforeach
                         </tbody>
@@ -56,7 +45,4 @@
         </div>
     </div>
 </div>
-{{-- @foreach ( $Products as $product )
-@include('products.composition')
-@endforeach --}}
 @endsection

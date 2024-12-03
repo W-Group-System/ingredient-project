@@ -56,36 +56,43 @@
                         <tbody>
                             @foreach ($users as $user)
                             <tr>
-                                <td>
+                                <td class="p-2">
                                     <button title='Disable' class="btn btn-md btn-rounded btn-info btn-icon"
                                         data-toggle="modal" data-target="#edit{{$user->id}}">
                                         <i class="ti-pencil-alt" style="margin-left: -3px;"></i>
                                     </button>
+
+                                    <button title='Change Password' class="btn btn-md btn-rounded btn-primary btn-icon"
+                                        data-toggle="modal" data-target="#password{{$user->id}}">
+                                        <i class="ti-lock" style="margin-left: -3px;"></i>
+                                    </button>
     
-                                    @if($user->status == 'Active')
-                                    <form method="POST" action="{{url('deactivate-user/'.$user->id)}}"
-                                        class="d-inline-block" onsubmit="show()">
-                                        @csrf
-                                        <button type="button" class="btn btn-icon btn-rounded btn-danger deactivate"
-                                            title="Deactivate">
-                                            <i class="ti-na" style="margin-left: -3px;"></i>
-                                        </button>
-                                    </form>
-                                    @elseif($user->status != "Deactivate")
-                                    <form method="POST" action="{{url('activate-user/'.$user->id)}}"
-                                        class="d-inline-block" onsubmit="show()">
-                                        @csrf
-                                        <button type="button" class="btn btn-icon btn-rounded btn-success activate"
-                                            title="Activate">
-                                            <i class="ti-check" style="margin-left: -3px;"></i>
-                                        </button>
-                                    </form>
+                                    @if(auth()->user()->id !== $user->id)
+                                        @if($user->status == 'Active')
+                                        <form method="POST" action="{{url('deactivate-user/'.$user->id)}}"
+                                            class="d-inline-block" onsubmit="show()">
+                                            @csrf
+                                            <button type="button" class="btn btn-md btn-icon btn-rounded btn-danger deactivate"
+                                                title="Deactivate">
+                                                <i class="ti-na" style="margin-left: -3px;"></i>
+                                            </button>
+                                        </form>
+                                        @elseif($user->status != "Deactivate")
+                                        <form method="POST" action="{{url('activate-user/'.$user->id)}}"
+                                            class="d-inline-block" onsubmit="show()">
+                                            @csrf
+                                            <button type="button" class="btn btn-md btn-icon btn-rounded btn-success activate"
+                                                title="Activate">
+                                                <i class="ti-check" style="margin-left: -3px;"></i>
+                                            </button>
+                                        </form>
+                                        @endif
                                     @endif
                                 </td>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{$user->role}}</td>
-                                <td>
+                                <td class="p-2">{{ $user->name }}</td>
+                                <td class="p-2">{{ $user->email }}</td>
+                                <td class="p-2">{{$user->role}}</td>
+                                <td class="p-2">
                                     @if ($user->status == 'Active')
                                     <span class="badge badge-success">
                                         {{$user->status}}
@@ -99,6 +106,7 @@
                             </tr>
     
                             @include('user.edit')
+                            @include('user.password')
                             @endforeach
                         </tbody>
                     </table>

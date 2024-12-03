@@ -82,4 +82,19 @@ class UserController extends Controller
             'Plant Manager' => 'Plant Manager'
         ];
     }
+
+    public function changePassword(Request $request,$id)
+    {
+        // dd($request->all(),$id);
+        $this->validate($request, [
+            'password' => 'min:6|confirmed'
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        Alert::success('Successfully Saved')->persistent('Dismiss');
+        return back();
+    }
 }

@@ -74,6 +74,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('update-user/{id}', 'UserController@update');
     Route::post('deactivate-user/{id}', 'UserController@deactivate');
     Route::post('activate-user/{id}', 'UserController@activate');
+    Route::post('change-password/{id}', 'UserController@changePassword');
 
     # Ingredients
     Route::get('ingredient', 'IngredientsController@index');   

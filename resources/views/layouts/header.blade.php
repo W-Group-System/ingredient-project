@@ -24,6 +24,7 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="{{ asset('/body_css/css/vertical-layout-light/style.css') }}">
     <link rel="stylesheet" href="{{ asset('/vendor/sweetalert2/sweetalert2.min.css') }}">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
     <!-- endinject -->
 </head>
 
@@ -240,6 +241,8 @@
     <script src="{{ asset('/body_css/vendors/inputmask/jquery.inputmask.bundle.js') }}"></script>
     <script src="{{ asset('/body_css/js/inputmask.js') }}"></script>
     <script src="{{ asset('/vendor/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
     <script>
         function show() {

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Ingredient;
 use Illuminate\Http\Request;
+use stdClass;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $ingredients = Ingredient::get();
+
+        $reserved_array = [];
+        $object = new stdClass;
+        $object->reserved = count($ingredients->where('status',null));
+        $object->cancelled = count($ingredients->where('status','Cancelled'));
+        $reserved_array[] = $object;
+        
+        return view('home', compact('ingredients', 'reserved_array'));
     }
 }

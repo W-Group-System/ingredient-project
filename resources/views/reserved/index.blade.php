@@ -8,7 +8,7 @@
                     <p class="text-white">Total Reserved</p>
                 </div>
                 <div class="card-body">
-                    <p class="fs-30 mb-2">{{count($reserved->where('status','!=',null))}}</p>
+                    <p class="fs-30 mb-2">{{count($reserved)}}</p>
                 </div>
             </div>
         </div>
@@ -42,33 +42,36 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($reserved->where('status','!=',null) as $reserve)
+                                @foreach ($reserved as $reserve)
                                     <tr>
                                         <td class="p-2">
-                                            <button title="Edit" type="button" class="btn btn-info btn-rounded btn-icon" data-toggle="modal" data-target="#edit{{$reserve->id}}">
-                                                <i class="ti-pencil-alt" style="margin: -3px;"></i>
-                                            </button>
-    
-                                            <form method="POST" id="cancelForm{{$reserve->id}}" class="d-inline-block" action="{{url('cancel-reserved/'.$reserve->id)}}" onsubmit="show()">
-                                                
-                                                @csrf 
-                                                <button title="Cancel" type="button" class="btn btn-danger btn-rounded btn-icon d-inline-block" onclick="cancel({{$reserve->id}})">
-                                                    <i class="ti-na" style="margin: -3px;"></i>
+                                            @if($reserve->status != 'Cancelled')
+                                                <button title="Edit" type="button" class="btn btn-info btn-rounded btn-icon" data-toggle="modal" data-target="#edit{{$reserve->id}}">
+                                                    <i class="ti-pencil-alt" style="margin: -3px;"></i>
                                                 </button>
-                                            </form>
+        
+                                                <form method="POST" id="cancelForm{{$reserve->id}}" class="d-inline-block" action="{{url('cancel-reserved/'.$reserve->id)}}" onsubmit="show()">
+                                                    
+                                                    @csrf 
+                                                    <button title="Cancel" type="button" class="btn btn-danger btn-rounded btn-icon d-inline-block" onclick="cancel({{$reserve->id}})">
+                                                        <i class="ti-na" style="margin: -3px;"></i>
+                                                    </button>
+                                                </form>
+                                            @endif
                                         </td>
                                         <td>{{$reserve->buyers_code}}</td>
                                         <td>{{$reserve->product_code}}</td>
                                         <td>{{$reserve->qty}}</td>
                                         <td>{{date('Y-m-d', strtotime($reserve->load_date))}}</td>
                                         <td>
-                                            @if($reserve->status == 'Reserved')
-                                            <span class="badge badge-success">
-                                            @elseif($reserve->status == 'Cancelled')
+                                            @if($reserve->status == 'Cancelled')
                                             <span class="badge badge-danger">
+                                                {{$reserve->status}}
+                                            @else
+                                            <span class="badge badge-success">
+                                                Reserved
                                             @endif
 
-                                                {{$reserve->status}}
                                             </span>
                                         </td>
                                     </tr>

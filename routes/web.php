@@ -38,7 +38,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     # Outbound Ingredients
     Route::get('/outbound','OutboundController@index');
+    Route::post('/store-outbound','OutboundController@store');
     Route::post('update-so_number/{id}', 'OutboundController@update');
+    Route::get('edit-outbound/{id}', 'OutboundController@edit');
 
     # Reserved
     Route::get('/reserved','ReservedController@index');

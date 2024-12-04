@@ -44,7 +44,7 @@ class ReservedController extends Controller
         $reserved->qty = $request->qty;
         $reserved->product_code = $request->product_code;
         $reserved->load_date = $request->load_date;
-        $reserved->status = 'Reserved';
+        // $reserved->status = 'Reserved';
         $reserved->save();
 
         Alert::success('Successfully Saved')->persistent('Dismiss');

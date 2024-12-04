@@ -7,7 +7,7 @@
                 <p class="text-white">Total Available</p>
             </div>
             <div class="card-body">
-                <p class="fs-30 mb-2">{{count($available->where('so_number','!=',null))}}</p>
+                <p class="fs-30 mb-2">{{count($available->where('status', null)->where('qty', '>', 0))}}</p>
             </div>
         </div>
     </div>
@@ -34,8 +34,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($available->where('so_number','!=',null) as $a)
-                                <tr>
+                            @foreach ($available->where('status',null)->where('qty', '>', 0) as $a)
+                                <tr class="@if($a->qty <= 10) bg-danger text-white @endif">
                                     <td class="p-2">{{$a->so_number}}</td>
                                     <td class="p-2">{{$a->buyers_code}}</td>
                                     <td class="p-2">{{$a->qty}}</td>

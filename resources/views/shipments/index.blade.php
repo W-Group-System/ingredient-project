@@ -30,7 +30,7 @@
                 <div class="card-header card-header-radius bg-primary">
                     <div class="d-flex align-items-center">
                         <p class="card-title text-white m-0">
-                            Shipments
+                            Inbound
                         </p>
                         <button type="button" class="btn btn-md btn-warning ml-1" id="upload" data-toggle="modal"data-target="#add">Upload</button>
                         <a href="{{url('shipment-export')}}" class="btn btn-md btn-success ml-1" id="export" >Export Template</a>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Ingredient;
+use App\Outbound;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -15,9 +16,10 @@ class OutboundController extends Controller
      */
     public function index()
     {
-        $outbound = Ingredient::get();
-
-        return view('outbound.index', compact('outbound'));
+        $outbound = Outbound::get();
+        $ingredients = Ingredient::where('status', null)->where('qty','>',0)->get();
+        
+        return view('outbound.index', compact('outbound', 'ingredients'));
     }
 
     /**
@@ -38,7 +40,30 @@ class OutboundController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $ingredient = Ingredient::where('buyers_code', $request->buyers_code)->first();
+        if ($request->qty > $ingredient->qty)
+        {
+            Alert::error('The quantity you entered exceeds the limit')->persistent('Dismiss');
+            return back();
+        }
+        else
+        {
+            $current_qty = $ingredient->qty - $request->qty;
+            $ingredient->qty = $current_qty;
+            $ingredient->save();
+            
+            $outbound = new Outbound;
+            $outbound->buyers_code = $request->buyers_code;
+            $outbound->so_number = $request->so_number;
+            $outbound->product_code = $request->product_code;
+            $outbound->qty = $request->qty;
+            $outbound->load_date = $request->load_date;
+            $outbound->ingredient_id = $ingredient->id;
+            $outbound->save();
+
+            Alert::success('Successfully Saved')->persistent('Dismiss');
+            return back();
+        }
     }
 
     /**
@@ -60,7 +85,9 @@ class OutboundController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ingredient = Ingredient::where('buyers_code',$id)->first();
+        
+        return response()->json($ingredient);
     }
 
     /**
@@ -72,12 +99,12 @@ class OutboundController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $outbound = Ingredient::findOrFail($id);
-        $outbound->so_number = $request->so_number;
-        $outbound->save();
+        // $outbound = Ingredient::findOrFail($id);
+        // $outbound->so_number = $request->so_number;
+        // $outbound->save();
 
-        Alert::success('Successfully Added SO Number')->persistent('Dismiss');
-        return back();
+        // Alert::success('Successfully Added SO Number')->persistent('Dismiss');
+        // return back();
     }
 
     /**

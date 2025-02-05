@@ -36,6 +36,9 @@ Route::group(['middleware' => 'auth'], function () {
     // Inbound Ingredients
     Route::get('/inbound','InboundController@index');
 
+    // Raw Materials
+    Route::get('raw_materials', 'RawMaterialController@index');
+
     # Outbound Ingredients
     Route::get('/outbound','OutboundController@index');
     Route::post('/store-outbound','OutboundController@store');

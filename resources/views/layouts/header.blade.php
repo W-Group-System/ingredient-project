@@ -100,6 +100,12 @@
                             <span class="menu-title">Product</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/raw_materials') }}">
+                            <i class="ti-archive menu-icon"></i>
+                            <span class="menu-title">Raw Materials</span>
+                        </a>
+                    </li>
                     <li class="nav-item"> 
                         <a class="nav-link" href="{{ url('/available') }}">
                             <i class="icon-check menu-icon"></i>

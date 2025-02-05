@@ -45,9 +45,108 @@
         border-top-right-radius:20px !important; 
         border-top-left-radius: 20px !important;
     }
+
+    .preloader {
+		background-color: #f7f7f7;
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 999999;
+		-webkit-transition: .6s;
+		-o-transition: .6s;
+		transition: .6s;
+		margin: 0 auto;
+        /* opacity: .8; */
+	}
+
+	.preloader .preloader-circle {
+		width: 100px;
+		height: 100px;
+		position: relative;
+		border-style: solid;
+		border-width: 1px;
+		border-top-color:$theme-color;
+		border-bottom-color: transparent;
+		border-left-color: transparent;
+		border-right-color: transparent;
+		z-index: 10;
+		border-radius: 50%;
+		-webkit-box-shadow: 0 1px 5px 0 rgba(35, 181, 185, 0.15);
+		box-shadow: 0 1px 5px 0 rgba(35, 181, 185, 0.15);
+		background-color: #ffffff;
+		-webkit-animation: zoom 2000ms infinite ease;
+		animation: zoom 2000ms infinite ease;
+		-webkit-transition: .6s;
+		-o-transition: .6s;
+		transition: .6s;
+	}
+	.preloader .preloader-circle2 {
+		border-top-color: #0078ff;
+	}
+	.preloader .preloader-img {
+		position: absolute;
+		top: 50%;
+		z-index: 200;
+		left: 0;
+		right: 0;
+		margin: 0 auto;
+		text-align: center;
+		display: inline-block;
+		-webkit-transform: translateY(-50%);
+		-ms-transform: translateY(-50%);
+		transform: translateY(-50%);
+		padding-top: 6px;
+		-webkit-transition: .6s;
+		-o-transition: .6s;
+		transition: .6s;
+	}
+
+	.preloader .preloader-img img {
+		max-width: 55px;
+	}
+	.preloader .pere-text strong{
+		font-weight: 800;
+		color:#dca73a ;
+		text-transform: uppercase;
+	}
+
+    @-webkit-keyframes zoom {
+		0% {
+			-webkit-transform: rotate(0deg);
+			transform: rotate(0deg);
+			-webkit-transition: .6s;
+			-o-transition: .6s;
+			transition: .6s;
+		}
+
+		100% {
+			-webkit-transform: rotate(360deg);
+			transform: rotate(360deg);
+			-webkit-transition: .6s;
+			-o-transition: .6s;
+			transition: .6s;
+		}
+	}
 </style>
 
 <body>
+    <!-- Preloader Start -->
+    <div id="preloader-active" style="display: none;">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="{{asset('img/wgroup.png')}}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader Start -->
+
     <div class="container-scroller">
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -88,43 +187,43 @@
         <div class="container-fluid page-body-wrapper">
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
-                    <li class="nav-item">
+                    <li class="nav-item" onclick="show()">
                         <a class="nav-link" href="{{ url('/home') }}">
                             <i class="icon-grid menu-icon"></i>
                             <span class="menu-title">Dashboard</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" onclick="show()">
                         <a class="nav-link" href="{{ url('/products') }}">
                             <i class="ti-package menu-icon"></i>
                             <span class="menu-title">Product</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" onclick="show()">
                         <a class="nav-link" href="{{ url('/raw_materials') }}">
                             <i class="ti-archive menu-icon"></i>
                             <span class="menu-title">Raw Materials</span>
                         </a>
                     </li>
-                    <li class="nav-item"> 
+                    <li class="nav-item" onclick="show()"> 
                         <a class="nav-link" href="{{ url('/available') }}">
                             <i class="icon-check menu-icon"></i>
                             <span class="menu-title">Available</span>
                         </a>
                     </li>
-                    <li class="nav-item"> 
+                    <li class="nav-item" onclick="show()"> 
                         <a class="nav-link" href="{{ url('/shipments') }}">
                             <i class="ti-import menu-icon"></i>
                             <span class="menu-title">Inbound</span>
                         </a>
                     </li>
-                    <li class="nav-item"> 
+                    <li class="nav-item" onclick="show()"> 
                         <a class="nav-link" href="{{ url('/outbound') }}">
                             <i class="ti-export menu-icon"></i>
                             <span class="menu-title">Outbound</span>
                         </a>
                     </li>
-                    <li class="nav-item"> 
+                    <li class="nav-item" onclick="show()"> 
                         <a class="nav-link" href="{{ url('/reserved') }}">
                             <i class="ti-bookmark menu-icon"></i>
                             <span class="menu-title">Reserved</span>
@@ -198,7 +297,7 @@
                                 {{-- <li class="nav-item"> <a class="nav-link" href="{{ url('/companies') }}">Company</a>
                                 </li> --}}
                                 {{-- <li class="nav-item"> <a class="nav-link" href="{{ url('/roles') }}">Role</a></li> --}}
-                                <li class="nav-item"> <a class="nav-link" href="{{ url('/users') }}">User</a></li>
+                                <li class="nav-item" onclick="show()"> <a class="nav-link" href="{{ url('/users') }}">User</a></li>
                             </ul>
                         </div>
                     </li>
@@ -276,7 +375,8 @@
 
     <script>
         function show() {
-            document.getElementById("loader").style.display="block";
+            // document.getElementById("loader").style.display="block";
+            document.getElementById("preloader-active").style.display="block";
         }
         function logout() {
             event.preventDefault();

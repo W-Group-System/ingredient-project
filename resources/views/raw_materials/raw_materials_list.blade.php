@@ -8,7 +8,7 @@
                     <p class="text-white">Total Raw Materials</p>
                 </div>
                 <div class="card-body">
-                    {{-- <p class="fs-30 mb-2">{{count($reserved->where('status','!=',null))}}</p> --}}
+                    <p class="fs-30 mb-2">{{count($raw_materials)}}</p>
                 </div>
             </div>
         </div>

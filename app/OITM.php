@@ -13,4 +13,9 @@ class OITM extends Model
      {
      return $this->belongsTo(OITB::class, 'ItmsGrpCod', 'ItmsGrpCod');
      }
+
+     public function warehouse()
+{
+    return $this->hasMany(OITW::class, 'ItemCode', 'ItemCode');
+}
 }

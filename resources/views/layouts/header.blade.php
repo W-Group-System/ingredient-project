@@ -131,6 +131,10 @@
 			transition: .6s;
 		}
 	}
+
+    .pagination {
+        margin-top: 15px;
+    }
 </style>
 
 <body>
@@ -389,7 +393,7 @@
                 serverSide: false,
                 ordering: false,
                 dom: 'Bfrtip',
-                pageLength: 10,
+                paginate: 10,
             });
         });
     </script>

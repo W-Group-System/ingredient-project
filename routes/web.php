@@ -86,6 +86,16 @@ Route::group(['middleware' => 'auth'], function () {
 
     # Ingredients
     Route::get('ingredient', 'IngredientsController@index');   
+    Route::get('/allocated','IngredientsController@allocated');
+    Route::get('incoming_po', 'IngredientsController@incoming_po');   
+
+    Route::get('incoming_pr', 'IngredientsController@incoming_pr');   
+    Route::get('get_items/{id}', 'IngredientsController@get_items');
+    Route::post('store-pr','IngredientsController@store_pr');
+    Route::get('get_pr/{id}', 'IngredientsController@get_pr');
+    Route::post('store-po','IngredientsController@store_po');
+    Route::delete('delete_pr/{id}','IngredientsController@delete_pr');
+    Route::delete('delete_po/{id}','IngredientsController@delete_po');
     
     # Shipment
     Route::get('shipments', 'ShipmentController@index');

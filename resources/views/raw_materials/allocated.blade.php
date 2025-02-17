@@ -1,18 +1,6 @@
 @extends('layouts.header')
 
 @section('content')
-    <div class="row">
-        <div class="col-md-3 mb-4 stretch-card">
-            <div class="card border border-1 border-primary">
-                <div class="card-header bg-primary" style="border-top-left-radius: 20px; border-top-right-radius:20px;">
-                    <p class="text-white">Incomming</p>
-                </div>
-                <div class="card-body">
-                    {{-- <p class="fs-30 mb-2">{{count($reserved->where('status','!=',null))}}</p> --}}
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="row">
         <div class="col-lg-6 grid-margin stretch-card">
@@ -53,7 +41,7 @@
                 <div class="card-header bg-primary card-header-radius">
                     <div class="d-flex align-items-center">
                         <p class="card-title text-white m-0">
-                            Onhand
+                            Outbound Ingredients
                         </p>
                     </div>
                 </div>
@@ -62,16 +50,25 @@
                         <table class="table table-bordered table-striped table-hover tablewithSearch">
                             <thead>
                                 <tr>
-                                    <th>Item</th>
-                                    <th>Cumulative Quantity</th>
+                                    {{-- <th>Action</th> --}}
+                                    <th>Booked Orders</th>
+                                    <th>Quantity</th>
+                                    <th>Product Code</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($uniqueIngredients as $ingredient)
-                                    <tr>
-                                        <td>{{ $ingredient->ItemCode }}</td>
-                                        <td>{{ number_format($ingredient->cumulativeQuantity) }}</td>
-                                    </tr>
+                                @foreach ($allocateds as $allocated)
+                                    @foreach ($allocated->rdr1 as $materials)
+                                        <tr>
+                                            {{-- <td>
+                                                <button onclick="" type="button" class="btn btn-info btn-rounded btn-icon" title="View Raw Materials" data-toggle="modal" data-target="#viewRawMaterials{{ $outbound->DocEntry }}" ><i class="ti-eye" style="margin: -3px;"></i></button>
+                                                @include('raw_materials.outbound_materials')
+                                            </td> --}}
+                                            <td>{{ $allocated->NumAtCard }}</td>
+                                            <td>{{ $materials->Quantity }}</td>
+                                            <td>{{ $materials->Dscription }}</td>
+                                        </tr>
+                                    @endforeach
                                 @endforeach
                             </tbody>
                         </table>

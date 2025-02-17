@@ -248,7 +248,10 @@
                                 {{-- <li class="nav-item"> <a class="nav-link" href="{{ url('/outbound') }}">Outbound</a></li> --}}
                                 {{-- <li class="nav-item"> <a class="nav-link" href="{{ url('/reserved') }}">Reserved</a></li> --}}
                                 {{-- <li class="nav-item"> <a class="nav-link" href="{{ url('/profile') }}">Profile</a></li> --}}
-                                <li class="nav-item"> <a class="nav-link" href="{{ url('/ingredient') }}">Ingredient</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{ url('/ingredient') }}">Onhand</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{ url('/allocated') }}">Allocated</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{ url('/incoming_pr') }}">Incoming PR</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{ url('/incoming_po') }}">Incoming PO</a></li>
                                 {{-- <li class="nav-item"> <a class="nav-link" href="{{ url('/shipments') }}">Shipments</a></li> --}}
                             </ul>
                         </div>

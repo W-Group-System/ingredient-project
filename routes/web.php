@@ -101,5 +101,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('shipments', 'ShipmentController@index');
     Route::get('shipment-export', 'ShipmentController@shipmentExport');
     Route::post('shipment-import', 'ShipmentController@shipmentImport');
+
+    #Report
+    Route::get('allocation_report', 'ReportController@index');
+
 });
 

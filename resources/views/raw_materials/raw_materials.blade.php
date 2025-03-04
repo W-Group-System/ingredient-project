@@ -67,10 +67,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($uniqueIngredients as $ingredient)
+                                @foreach ($uniqueIngredients as $onhand)
                                     <tr>
-                                        <td>{{ $ingredient->ItemCode }}</td>
-                                        <td>{{ number_format($ingredient->cumulativeQuantity) }}</td>
+                                        <td>{{ $onhand->ItemCode }}</td>
+                                        <td>{{ number_format($onhand->cumulativeQuantity) }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

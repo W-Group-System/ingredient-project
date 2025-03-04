@@ -285,7 +285,7 @@
                         </a>
                         <div class="collapse" id="reports">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="{{ url('/balance_inventory') }}">Balance
+                                <li class="nav-item"> <a class="nav-link" href="{{ url('/allocation_report') }}">Balance
                                         Inventory Report</a></li>
                                 <li class="nav-item"> <a class="nav-link" href="{{ url('/stock_status_level') }}">Stock
                                         Status Level Report</a></li>

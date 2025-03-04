@@ -248,7 +248,10 @@
                                 {{-- <li class="nav-item"> <a class="nav-link" href="{{ url('/outbound') }}">Outbound</a></li> --}}
                                 {{-- <li class="nav-item"> <a class="nav-link" href="{{ url('/reserved') }}">Reserved</a></li> --}}
                                 {{-- <li class="nav-item"> <a class="nav-link" href="{{ url('/profile') }}">Profile</a></li> --}}
-                                <li class="nav-item"> <a class="nav-link" href="{{ url('/ingredient') }}">Ingredient</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{ url('/ingredient') }}">Onhand</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{ url('/allocated') }}">Allocated</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{ url('/incoming_pr') }}">Incoming PR</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{ url('/incoming_po') }}">Incoming PO</a></li>
                                 {{-- <li class="nav-item"> <a class="nav-link" href="{{ url('/shipments') }}">Shipments</a></li> --}}
                             </ul>
                         </div>
@@ -282,7 +285,7 @@
                         </a>
                         <div class="collapse" id="reports">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="{{ url('/balance_inventory') }}">Balance
+                                <li class="nav-item"> <a class="nav-link" href="{{ url('/allocation_report') }}">Balance
                                         Inventory Report</a></li>
                                 <li class="nav-item"> <a class="nav-link" href="{{ url('/stock_status_level') }}">Stock
                                         Status Level Report</a></li>

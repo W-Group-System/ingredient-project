@@ -9,4 +9,13 @@ class RDR1 extends Model
      protected $connection = 'sqlsrv';
      protected $table = 'RDR1';
 
+     public function oitm()
+     {
+     return $this->belongsTo(OITM::class, 'ItemCode', 'ItemCode');
+     }
+     public function bom()
+{
+    return $this->hasMany(ITT1::class, 'Father', 'ItemCode'); 
+}
+
 }

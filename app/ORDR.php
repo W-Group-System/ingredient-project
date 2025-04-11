@@ -13,4 +13,9 @@ class ORDR extends Model
      {
           return $this->hasMany(RDR1::class, 'DocEntry', 'DocEntry');
      }
+
+     public function productionOrders()
+     {
+          return $this->hasMany(OWOR::class, 'OriginNum', 'DocNum');
+     }
 }

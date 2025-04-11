@@ -305,6 +305,8 @@
                                 </li> --}}
                                 {{-- <li class="nav-item"> <a class="nav-link" href="{{ url('/roles') }}">Role</a></li> --}}
                                 <li class="nav-item" onclick="show()"> <a class="nav-link" href="{{ url('/users') }}">User</a></li>
+                                <li class="nav-item" onclick="show()"> <a class="nav-link" href="{{ url('/group_setup') }}">Ingredient Group</a></li>
+                                <li class="nav-item" onclick="show()"> <a class="nav-link" href="{{ url('/raw_material') }}">Other Raw Materials</a></li>
                             </ul>
                         </div>
                     </li>

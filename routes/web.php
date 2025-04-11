@@ -102,6 +102,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('shipment-export', 'ShipmentController@shipmentExport');
     Route::post('shipment-import', 'ShipmentController@shipmentImport');
 
+    #Ingredient Group
+    Route::get('group_setup', 'ReportController@ingredient_groupings');
+    Route::post('new-group','ReportController@new_group');
+    Route::get('/ingredients_group/group_setup/{id}','ReportController@view_group');
+    Route::post('/add_ingredient','ReportController@add_ingredient');
+
+    Route::get('raw_material', 'ReportController@raw_materials');
+    Route::post('/add_material','ReportController@add_material');
+
     #Report
     Route::get('allocation_report', 'ReportController@index');
 

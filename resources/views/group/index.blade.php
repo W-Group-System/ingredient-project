@@ -23,9 +23,28 @@
                                 <td style="center">
                                     <a href="{{ url('/ingredients_group/group_setup/' . $group->id) }}" title="View Group">
                                         <button type="button" class="btn btn-primary btn-rounded btn-icon">
-                                                <i class="ti-eye"></i>
+                                            <i class="ti-eye"></i>
                                         </button> 
                                     </a>
+                                    <button type="button"  class="btn btn-warning  btn-rounded btn-icon"
+                                        data-target="#editGroup{{ $group->id }}" data-toggle="modal" title='Edit Group'>
+                                        <i class="ti-pencil"></i>
+                                    </button>   
+                                    @if ($group->status == 1)
+                                        <form action="{{ url('/deactivate/' . $group->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger btn-rounded btn-icon" title="Deactivate">
+                                                <i class="ti-close"></i>
+                                            </button>
+                                        </form>
+                                    @else
+                                        <form action="{{ url('/activate/' . $group->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            <button type="submit" class="btn btn-success btn-rounded btn-icon" title="Activate">
+                                                <i class="ti-check"></i>
+                                            </button>
+                                        </form>
+                                    @endif
                                 </td>
                                 <td>{{ $group->name }}</td>
                                 <td>
@@ -48,6 +67,9 @@
     
 </script>
 @include('group.new_group')
+@foreach ($groups as $group)
+@include('group.edit_group')
+@endforeach
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     @if ($errors->any())

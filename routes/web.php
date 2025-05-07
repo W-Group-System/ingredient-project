@@ -21,8 +21,8 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
     // Dashboard
-    Route::get('/', 'HomeController@index');
-    Route::get('/home','HomeController@index');
+    // Route::get('/', 'HomeController@index');
+    // Route::get('/home','HomeController@index');
 
     // Products
     Route::get('/products','ProductsController@index');
@@ -107,11 +107,20 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('new-group','ReportController@new_group');
     Route::get('/ingredients_group/group_setup/{id}','ReportController@view_group');
     Route::post('/add_ingredient','ReportController@add_ingredient');
+    Route::post('deactivate/{id}', 'ReportController@deactivate');
+    Route::post('activate/{id}', 'ReportController@activate');
+    Route::post('/edit_group/{id}', 'ReportController@new_group');
+    Route::delete('/delete_ingredient/{id}', 'ReportController@delete_ingredient');
+    Route::post('/edit_group/{id}', 'ReportController@new_group');
 
     Route::get('raw_material', 'ReportController@raw_materials');
     Route::post('/add_material','ReportController@add_material');
+    Route::delete('/delete_material/{id}', 'ReportController@delete_material');
+    Route::post('/edit_ingredient/{id}', 'ReportController@edit_ingredient');
+
 
     #Report
+    Route::get('/', 'ReportController@index');
     Route::get('allocation_report', 'ReportController@index');
 
 });

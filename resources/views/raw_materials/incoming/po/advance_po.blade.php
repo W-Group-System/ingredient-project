@@ -33,7 +33,7 @@
                         <input type="number" name="quantity" class="form-control" readonly>
                     </div>
                     <div class="form-group mb-2">
-                        PR Number
+                        PO Number
                         <input type="number" name="po_no" class="form-control" required>
                     </div>
                     <div class="form-group mb-2">

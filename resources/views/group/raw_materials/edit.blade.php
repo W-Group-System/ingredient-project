@@ -1,31 +1,23 @@
-<div class="modal fade" id="NewIngredient" tabindex="-1" role="dialog">
+<div class="modal fade" id="editRawMaterial{{  $raw_material->id }}" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add Ingredient</h5>
+                <h5 class="modal-title">Edit Raw Material</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="{{url('add_ingredient')}}" onsubmit="show()">
+            <form method="POST" action="{{url('edit_material/'. $raw_material->id)}}" onsubmit="show()">
                 @csrf 
                 <div class="modal-body">
                     <div class="form-group mb-2">
                         <div class="form-group mb-2">
-                            <input type="hidden" name="group_id[]" class="form-control" value="{{ $group->id }}">
-                        </div>
-                        <div class="form-group mb-2">
                             Ingredient
-                            <select data-placeholder="Select Ingredient" name="item_code[]" class="form-control js-example-basic-single" style="width: 100%;" required>
-                                <option value=""></option>
-                                @foreach ($ingredients as $ingredient)
-                                    <option value="{{$ingredient->ItemCode}}">{{$ingredient->ItemCode}}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" class="form-control" name="item_code" value="{{ $raw_material->item_code }}" readonly>
                         </div>
                         <div class="form-group">
                             Ingredient Description
-                            <input type="text" class="form-control" name="description[]">
+                            <input type="text" class="form-control" name="description" value="{{ $raw_material->description }}">
                         </div>
                     </div>
                 </div>

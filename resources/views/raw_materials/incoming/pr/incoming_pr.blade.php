@@ -60,7 +60,14 @@
                                             <td>{{ $incoming->Dscription }}</td>
                                             <td>{{ $data->DocNum }}</td>
                                             <td>{{ $data->DocDate }}</td>
-                                            <td>{{ number_format($incoming->OpenQty,2) }}</td>
+                                            <td>
+                                                @if ($incoming->OpenQty <= 0)
+                                                    {{ number_format($incoming->Quantity,2) }}
+                                                @else
+                                                    {{ number_format($incoming->OpenQty,2) }}
+                                                @endif
+                                                
+                                            </td>
                                         </tr>
                                     @endforeach
                                 @endforeach

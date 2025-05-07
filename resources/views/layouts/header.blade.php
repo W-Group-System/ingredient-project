@@ -191,12 +191,12 @@
         <div class="container-fluid page-body-wrapper">
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
-                    <li class="nav-item" onclick="show()">
+                    {{-- <li class="nav-item" onclick="show()">
                         <a class="nav-link" href="{{ url('/home') }}">
                             <i class="icon-grid menu-icon"></i>
                             <span class="menu-title">Dashboard</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item" onclick="show()">
                         <a class="nav-link" href="{{ url('/products') }}">
                             <i class="ti-package menu-icon"></i>
@@ -209,24 +209,24 @@
                             <span class="menu-title">Raw Materials</span>
                         </a>
                     </li>
-                    <li class="nav-item" onclick="show()"> 
+                    {{-- <li class="nav-item" onclick="show()"> 
                         <a class="nav-link" href="{{ url('/available') }}">
                             <i class="icon-check menu-icon"></i>
                             <span class="menu-title">Available</span>
                         </a>
-                    </li>
-                    <li class="nav-item" onclick="show()"> 
+                    </li> --}}
+                    {{-- <li class="nav-item" onclick="show()"> 
                         <a class="nav-link" href="{{ url('/shipments') }}">
                             <i class="ti-import menu-icon"></i>
                             <span class="menu-title">Inbound</span>
                         </a>
-                    </li>
-                    <li class="nav-item" onclick="show()"> 
+                    </li> --}}
+                    {{-- <li class="nav-item" onclick="show()"> 
                         <a class="nav-link" href="{{ url('/outbound') }}">
                             <i class="ti-export menu-icon"></i>
                             <span class="menu-title">Outbound</span>
                         </a>
-                    </li>
+                    </li> --}}
                     <li class="nav-item" onclick="show()"> 
                         <a class="nav-link" href="{{ url('/reserved') }}">
                             <i class="ti-bookmark menu-icon"></i>
@@ -287,8 +287,8 @@
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link" href="{{ url('/allocation_report') }}">Balance
                                         Inventory Report</a></li>
-                                <li class="nav-item"> <a class="nav-link" href="{{ url('/stock_status_level') }}">Stock
-                                        Status Level Report</a></li>
+                                {{-- <li class="nav-item"> <a class="nav-link" href="{{ url('/stock_status_level') }}">Stock
+                                        Status Level Report</a></li> --}}
                             </ul>
                         </div>
                     </li>

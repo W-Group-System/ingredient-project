@@ -20,14 +20,15 @@
                         <tbody>
                             @foreach ($raw_materials as $raw_material)
                             <tr> 
-                                {{-- <td style="center">
-                                    <a href="{{ url('/ingredients_group/group_setup/' . $group->id) }}" title="View Group">
-                                        <button type="button" class="btn btn-primary btn-rounded btn-icon">
-                                                <i class="ti-eye"></i>
-                                        </button> 
-                                    </a>
-                                </td> --}}
-                                <td></td>
+                                <td style="center">
+                                    <button type="button"  class="btn btn-warning  btn-rounded btn-icon"
+                                        data-target="#editRawMaterial{{ $raw_material->id }}" data-toggle="modal" title='Edit rawMaterial'>
+                                        <i class="ti-pencil"></i>
+                                    </button>   
+                                    <button type="button" class="btn btn-danger  btn-rounded btn-icon" onclick="confirmDelete({{ $raw_material->id }},)" title='Delete'>
+                                        <i class="ti-trash"></i>
+                                    </button> 
+                                </td>
                                 <td>{{ $raw_material->item_code }}</td>
                                 <td>
                                     {{ $raw_material->description }}
@@ -41,12 +42,52 @@
         </div>
     </div>
 </div>
-<script>
-    
-</script>
+
 @include('group.raw_materials.new_material')
+@foreach ($raw_materials as $raw_material)
+@include('group.raw_materials.edit')
+@endforeach
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+    function confirmDelete(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'This action cannot be undone.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                url = '{{ url('delete_material') }}/' + id;
+
+            $.ajax({
+                url: url,
+                method: 'DELETE',
+                data: {
+                    '_token': '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    Swal.fire(
+                        'Deleted!',
+                        'The record has been deleted.',
+                        'success'
+                    ).then(() => {
+                        location.reload();
+                    });
+                },
+                error: function() {
+                    Swal.fire(
+                        'Error!',
+                        'Something went wrong.',
+                        'error'
+                    );
+                }
+            });
+        }
+        });
+    }
     @if ($errors->any())
         Swal.fire({
             icon: 'error',

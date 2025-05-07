@@ -78,6 +78,7 @@ class IngredientsController extends Controller
                 $query->where('ItmsGrpNam', 'like', '%BLM%')
                 ->orWhere('ItmsGrpNam', 'like', '%PPW%')
                 ->orWhere('ItmsGrpNam', 'like', '%MC%')
+                ->orWhere('ItmsGrpNam', 'like', '%PPR%')
                 ;
             })
             ->whereHas('item.warehouse', function ($query) {
@@ -116,7 +117,8 @@ class IngredientsController extends Controller
                 $query->where(function ($q) {
                     $q->where('ItemCode', 'like', '%BLM%')
                     ->orWhere('ItemCode', 'like', '%PPW%')
-                    ->orWhere('ItemCode', 'like', '%MC%');
+                    ->orWhere('ItemCode', 'like', '%MC%')
+                    ->orWhere('ItemCode', 'like', '%PPR%');
                 })
                 ->whereIn('WhsCode', ['CAR', 'CAR2']); 
             })
@@ -254,7 +256,16 @@ class IngredientsController extends Controller
                 })
                 ->whereIn('WhsCode', ['CAR', 'CAR2']); 
             })
-            ->where('DocStatus', '!=', 'C') 
+            // ->where('DocStatus', '!=', 'C') 
+            ->where(function ($query) use ($endDate) {
+                $query->where('DocStatus', '!=', 'C')
+                      ->orWhere(function ($q) {
+                          $q->where('DocStatus', 'C')
+                            ->whereHas('por', function ($porQuery) {
+                                $porQuery->where('DocStatus', 'O');
+                            });
+                      });
+            })
             ->where('DocDate', '<=',  $endDate) 
             ->get();
 

@@ -14,7 +14,13 @@
                     </div>
                     <div class="form-group mb-2">
                         Product Code
-                        <input type="text" name="product_code" class="form-control" required>
+                        <select data-placeholder="Select Ingredient" name="product_code" class="form-control js-example-basic-single" style="width: 100%;" required>
+                            <option value=""></option>
+                            @foreach ($ingredients as $ingredient)
+                                <option value="{{$ingredient->ItemCode}}">{{$ingredient->ItemCode}}</option>
+                            @endforeach
+                        </select>
+                        {{-- <input type="text" name="product_code" class="form-control" required> --}}
                     </div>
                     <div class="form-group mb-2">
                         Qty

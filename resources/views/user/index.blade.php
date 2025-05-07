@@ -1,6 +1,6 @@
 @extends('layouts.header')
 @section('content')
-<div class="row">
+{{-- <div class="row">
     <div class="col-md-3 mb-4 stretch-card">
         <div class="card border border-1 border-primary">
             <div class="card-header bg-primary" style="border-top-left-radius: 20px; border-top-right-radius:20px;">
@@ -31,7 +31,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card border border-1 border-primary">

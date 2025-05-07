@@ -1,8 +1,8 @@
-<div class="modal fade" id="OutboundView" tabindex="-1" role="dialog" aria-labelledby="editSrf" aria-hidden="true">
+<div class="modal fade" id="OutboundView" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" style="max-width: 60%;">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="editSrf">Details</h5>
+          <h5 class="modal-title">Details</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>

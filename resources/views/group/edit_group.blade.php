@@ -1,19 +1,18 @@
-<div class="modal fade" id="edit{{$res->id}}" tabindex="-1" role="dialog">
+<div class="modal fade" id="editGroup{{ $group->id }}" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit SO Number</h5>
+                <h5 class="modal-title">Edit Group</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="{{url('update-so_number/'.$res->id)}}" onsubmit="show()">
+            <form method="POST" action="{{url('edit_group/'. $group->id)}}" onsubmit="show()">
                 @csrf 
-
                 <div class="modal-body">
-                    <div class="form-group">
-                        SO Number
-                        <input type="text" name="so_number" class="form-control" required>
+                    <div class="form-group mb-2">
+                        Group Name
+                        <input type="text" name="name" class="form-control" value="{{ $group->name }}" required>
                     </div>
                 </div>
                 <div class="modal-footer">

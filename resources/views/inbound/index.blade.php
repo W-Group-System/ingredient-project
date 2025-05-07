@@ -19,7 +19,7 @@
             <div class="card-header bg-primary card-header-radius">
                 <p class="card-title text-white m-0">
                     Inbound Orders
-                    {{-- <button type="button" class="btn btn-md btn-warning" id="addSrfBtn" data-toggle="modal" data-target="#formSampleRequest">New</button> --}}
+                    {{-- <button type="button" class="btn btn-md btn-warning"  data-toggle="modal" data-target="#formSampleRequest">New</button> --}}
                 </p>
             </div>
             <div class="card-body">

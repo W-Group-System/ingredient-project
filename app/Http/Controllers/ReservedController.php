@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Ingredient;
+use App\OITM;
 use App\Reserved;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -16,9 +17,9 @@ class ReservedController extends Controller
      */
     public function index()
     {
+        $ingredients = OITM::select('ItemCode')->get();
         $reserved = Ingredient::get();
-
-        return view('reserved.index', compact('reserved'));
+        return view('reserved.index', compact('reserved', 'ingredients'));
     }
 
     /**

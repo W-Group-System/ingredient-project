@@ -6,7 +6,7 @@
             <div class="card-body">
                 <h4 class="card-title d-flex justify-content-between align-items-center">
                     Reserved Orders
-                    {{-- <button type="button" class="btn btn-md btn-outline-primary" id="addSrfBtn" data-toggle="modal" data-target="#formSampleRequest">New</button> --}}
+                    {{-- <button type="button" class="btn btn-md btn-outline-primary" data-toggle="modal" data-target="#formSampleRequest">New</button> --}}
                 </h4>
                 <div class="table-responsive" >
                     <table class="table table-striped table-bordered table-hover tablewithSearch" id="sample_request_table">

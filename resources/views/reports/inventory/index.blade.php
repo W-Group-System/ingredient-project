@@ -96,8 +96,13 @@
                             @foreach ($group->items as $item)
                                 @foreach ($item->getAllocatedOrders($startDate, $endDate) as $order)
                                     <tr>
-                                        <td>{{ $order->DocNum }}</td>
-                                        <td>{{ $order->NumAtCard }}</td>
+                                        @if ($order->type === 'sap')
+                                            <td>{{ $order->DocNum }}</td>
+                                            <td>{{ $order->NumAtCard }}</td>
+                                        @else
+                                            <td>{{ $order->id }}</td>
+                                            <td>{{ $order->buyers_code }}</td>
+                                        @endif
                                         {{-- <td>{{ $order->DocDate }}</td> --}}
                                         @if ($order->type === 'sap' && $order->rdr1->isNotEmpty())
                                             @php
@@ -124,8 +129,11 @@
                                             <td>{{ $order->product_code }}</td>
                                             <td>{{ number_format($result, 2) }}</td>
                                         @endif
-
-                                        <td>{{ $order->DocDueDate }}</td>
+                                        @if ($order->type === 'sap')
+                                            <td>{{ $order->DocDueDate }}</td>
+                                        @else
+                                            <td>{{ $order->load_date }}</td>
+                                        @endif
                                         @foreach ($raw_materials as $raw_material)
                                         @if ($order->type === 'sap' && $order->rdr1->isNotEmpty())
                                             <td>
@@ -208,6 +216,10 @@
                                         $rawMaterialTotal += $qty;
                                     }
                                 }
+                                foreach ($raw_material->advancePr as $advancePurchase) {
+                                        $qty = $advancePurchase->quantity;
+                                        $rawMaterialTotal += $qty;
+                                }
 
                                 $totals[$raw_material->item_code] = [
                                     'item_code' => $raw_material->item_code,
@@ -231,16 +243,26 @@
                                             <td>
                                                 {{ getPONumber($prLines) }}
                                             </td>
-                                            {{-- <td>
-                                                @if ($prLines->OpenQty <= 0)
-                                                    {{ number_format($prLines->Quantity,2) }}
-                                                @else
-                                                    {{ number_format($prLines->OpenQty,2) }}
-                                                @endif
-                                            </td> --}}
                                         </tr>
                                     @endforeach
                                 @endforeach
+                                @if ($raw_material->advancePr)
+                                    @foreach ($raw_material->advancePr as $advancePrs)
+                                        <tr>
+                                            <td>{{ ($advancePrs)->id }}</td>
+                                            <td>{{ ($raw_material)->description }}</td>
+                                            <td>
+                                                @php
+                                                    $qty = $advancePrs->quantity;
+                                                @endphp
+                                                {{ number_format($qty, 2) }}
+                                            </td>
+                                            <td>
+                                                {{ $advancePrs->pos->po_no }}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                             @endforeach
                         </tbody>
                     </table>
@@ -269,7 +291,7 @@
                             </tr>
                             <tr>
                                 @foreach ($raw_materials as $raw_material)
-                                    <td>{{ number_format($raw_material->cumulativeQuantity, 2) }}</td>
+                                    <td> {{ number_format($raw_material->cumulativeQuantity, 2) }}</td>
                                 @endforeach
                             </tr>
                             <tr>

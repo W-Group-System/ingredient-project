@@ -42,6 +42,11 @@ class IngredientGroupItem extends Model
                   });
         });
      }    
+     public function advancePr()
+     {
+        return $this->hasMany(AdvancePurchaseRequest::class, 'item_code', 'item_code')
+            ->whereHas('pos'); 
+     }
 
     public function getParentProducts($itemCode)
     {

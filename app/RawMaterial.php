@@ -13,15 +13,20 @@ class RawMaterial extends Model
      {
         return $this->hasMany(OIVL::class, 'ItemCode', 'item_code');
      }
+     public function advancePr()
+     {
+        return $this->hasMany(AdvancePurchaseRequest::class, 'item_code', 'item_code')
+            ->whereHas('pos'); 
+     }
      public function oprq()
      {
         return $this->hasManyThrough(
             OPRQ::class, 
             PRQ1::class, 
-            'ItemCode', // foreign key on POR1 table
-            'DocEntry', // foreign key on OPOR table
-            'item_code', // local key on raw_materials
-            'DocEntry' // local key on POR1 table
+            'ItemCode', 
+            'DocEntry', 
+            'item_code', 
+            'DocEntry' 
         )->where('PRQ1.ItemCode', '=', $this->item_code)
         ->where('PRQ1.TargetType', '=', '22')
         ->where(function ($query) {

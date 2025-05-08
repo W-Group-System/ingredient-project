@@ -49,9 +49,11 @@ class ReportController extends Controller
             $group->items->each(function ($item) {
                 $ingredients = $item->oivl;
                 $incomingIngredients = $item->oprq;
+                $advancedPrs = $item->advancePr;
 
                 $runningTotal = 0; 
                 $incomingRunningTotal =0;
+                $advanceRunningTotal =0;
                 foreach ($ingredients->sortBy('DocDate') as $ingredient) {
                     $runningTotal += $ingredient->InQty; 
                     $runningTotal -= $ingredient->OutQty; 
@@ -61,9 +63,12 @@ class ReportController extends Controller
                          $incomingRunningTotal += $prq1->Quantity;
                     }
                 }
+                foreach ($advancedPrs->sortBy('DocDate') as $advancedPr) {
+                     $advanceRunningTotal += $advancedPr->quantity;
+                }
                 
                 $item->cumulativeQuantity = $runningTotal;
-                $item->incomingCumulativeQuantity = $incomingRunningTotal;
+                $item->incomingCumulativeQuantity = $advanceRunningTotal + $incomingRunningTotal;
             });
         });
 
@@ -72,14 +77,20 @@ class ReportController extends Controller
         $raw_materials = RawMaterial::all();
         $raw_materials->each(function ($material) {
             $ingredients = $material->oivl;
+            $advancedPrs = $material->advancePr;
         
             $runningTotal = 0;
+            $advanceRunningTotal = 0;
             foreach ($ingredients as $ingredient) {
                 $runningTotal += $ingredient->InQty;
                 $runningTotal -= $ingredient->OutQty;
             }
+            foreach ($advancedPrs as $advancedPr) {
+                $advanceRunningTotal += $advancedPr->quantity;
+            }
         
             $material->cumulativeQuantity = $runningTotal;
+
         });
 
         return view('reports.inventory.index', compact('groups','startDate', 'endDate', 'raw_materials', 'products', 'reserved_orders'));

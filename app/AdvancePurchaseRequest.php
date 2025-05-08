@@ -10,7 +10,8 @@ class AdvancePurchaseRequest extends Model
      protected $table = 'advance_purchase_requests';
 
      public function pos()
-{
-    return $this->hasOne(AdvancePurchaseOrder::class, 'pr_id', 'id');
-}
+     {
+        return $this->hasOne(AdvancePurchaseOrder::class, 'pr_id', 'id');
+     }
+
 }

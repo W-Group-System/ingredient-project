@@ -235,6 +235,7 @@ class IngredientsController extends Controller
         )->where('ItemCode', 'like', '%BLM%')
         ->orWhere('ItemCode', 'like', '%PPW%')
         ->orWhere('ItemCode', 'like', '%MC%')
+        ->orWhere('ItemCode', 'like', '%PPR%')
         ->get();
         if($endDate) {
             $incomings = OPRQ::with(['prq1'])

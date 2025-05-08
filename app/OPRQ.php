@@ -13,4 +13,16 @@ class OPRQ extends Model
      {
      return $this->hasMany(PRQ1::class, 'DocEntry', 'DocEntry');
      }
+
+     public function por()
+     {
+     return $this->hasManyThrough(
+          OPOR::class,
+          POR1::class,  
+          'BaseEntry',  
+          'DocEntry',  
+          'DocEntry',   
+          'DocEntry'    
+     ); 
+     }
 }

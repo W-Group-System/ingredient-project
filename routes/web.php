@@ -21,8 +21,8 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
     // Dashboard
-    Route::get('/', 'HomeController@index');
-    Route::get('/home','HomeController@index');
+    // Route::get('/', 'HomeController@index');
+    // Route::get('/home','HomeController@index');
 
     // Products
     Route::get('/products','ProductsController@index');
@@ -86,10 +86,42 @@ Route::group(['middleware' => 'auth'], function () {
 
     # Ingredients
     Route::get('ingredient', 'IngredientsController@index');   
+    Route::get('/allocated','IngredientsController@allocated');
+    Route::get('incoming_po', 'IngredientsController@incoming_po');   
+
+    Route::get('incoming_pr', 'IngredientsController@incoming_pr');   
+    Route::get('get_items/{id}', 'IngredientsController@get_items');
+    Route::post('store-pr','IngredientsController@store_pr');
+    Route::get('get_pr/{id}', 'IngredientsController@get_pr');
+    Route::post('store-po','IngredientsController@store_po');
+    Route::delete('delete_pr/{id}','IngredientsController@delete_pr');
+    Route::delete('delete_po/{id}','IngredientsController@delete_po');
     
     # Shipment
     Route::get('shipments', 'ShipmentController@index');
     Route::get('shipment-export', 'ShipmentController@shipmentExport');
     Route::post('shipment-import', 'ShipmentController@shipmentImport');
+
+    #Ingredient Group
+    Route::get('group_setup', 'ReportController@ingredient_groupings');
+    Route::post('new-group','ReportController@new_group');
+    Route::get('/ingredients_group/group_setup/{id}','ReportController@view_group');
+    Route::post('/add_ingredient','ReportController@add_ingredient');
+    Route::post('deactivate/{id}', 'ReportController@deactivate');
+    Route::post('activate/{id}', 'ReportController@activate');
+    Route::post('/edit_group/{id}', 'ReportController@new_group');
+    Route::delete('/delete_ingredient/{id}', 'ReportController@delete_ingredient');
+    Route::post('/edit_group/{id}', 'ReportController@new_group');
+
+    Route::get('raw_material', 'ReportController@raw_materials');
+    Route::post('/add_material','ReportController@add_material');
+    Route::delete('/delete_material/{id}', 'ReportController@delete_material');
+    Route::post('/edit_ingredient/{id}', 'ReportController@edit_ingredient');
+
+
+    #Report
+    Route::get('/', 'ReportController@index');
+    Route::get('allocation_report', 'ReportController@index');
+
 });
 

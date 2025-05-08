@@ -17,5 +17,9 @@ class PRQ1 extends Model
     {
         return $this->hasMany(POR1::class, 'BaseEntry', 'DocEntry');
     }
+    public function po()
+    {
+        return $this->belongsTo(OPOR::class, 'BaseEntry', 'DocEntry')->where('BaseType', 22);
+    }
 
 }

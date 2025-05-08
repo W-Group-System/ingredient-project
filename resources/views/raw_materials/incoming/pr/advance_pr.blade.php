@@ -1,40 +1,40 @@
-<div class="modal fade" id="new" tabindex="-1" role="dialog">
+<div class="modal fade" id="advance_pr" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add new outbound</h5>
+                <h5 class="modal-title">Advance PR</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="{{url('store-outbound')}}" onsubmit="show()">
+            <form method="POST" action="{{url('store-pr')}}" onsubmit="show()">
                 @csrf 
 
                 <div class="modal-body">
                     <div class="form-group mb-2">
-                        Buyers Code
-                        <select data-placeholder="Select buyers code" name="buyers_code" class="form-control js-example-basic-single" style="width: 100%;">
+                        Item Code
+                        <select data-placeholder="Select Item" name="item_code" class="form-control js-example-basic-single" style="width: 100%;">
                             <option value=""></option>
-                            @foreach ($ingredients as $ingredient)
-                                <option value="{{$ingredient->buyers_code}}">{{$ingredient->buyers_code}}</option>
+                            @foreach ($materials as $material)
+                                <option value="{{$material->ItemCode}}">{{$material->ItemCode}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group mb-2">
-                        SO Number
-                        <input type="text" name="so_number" class="form-control" required>
-                    </div>
-                    <div class="form-group mb-2">
-                        Product Code
-                        <input type="text" name="product_code" class="form-control" required>
+                        Item Name
+                        <input type="text" name="item_description" class="form-control" required>
                     </div>
                     <div class="form-group mb-2">
                         Qty
-                        <input type="number" name="qty" class="form-control" required>
+                        <input type="number" name="quantity" class="form-control" required>
                     </div>
                     <div class="form-group mb-2">
-                        Load Date
-                        <input type="date" name="load_date" class="form-control" required>
+                        PR Number
+                        <input type="number" name="pr_no" class="form-control" required>
+                    </div>
+                    <div class="form-group mb-2">
+                        Posting Date
+                        <input type="date" name="posting_date" class="form-control" required>
                     </div>
                 </div>
                 <div class="modal-footer">

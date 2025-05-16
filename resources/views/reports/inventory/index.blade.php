@@ -335,7 +335,7 @@
         </div>
     </div>
 
-    <button onclick="exportTablesToExcel()">Export to Excel</button>
+    {{-- <button onclick="exportTablesToExcel()">Export to Excel</button> --}}
 </div>
 @include('orders.booked_orders.view')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>

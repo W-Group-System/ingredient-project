@@ -172,8 +172,12 @@ class IngredientsController extends Controller
                 'DocDate',
                 'DocDueDate'
             )
+            ->where('U_PlaceLoading', 'LIKE', '%Philippines%')
             ->whereHas('rdr1', function ($query) {
                 $query->whereIn('WhsCode', ['CAR','CAR2']);
+            })
+            ->whereDoesntHave('productionOrders', function ($query) {
+                $query->where('Status', 'L');
             })
             ->where('DocStatus', 'O')
             // ->where('Printed', 'N')
@@ -205,7 +209,7 @@ class IngredientsController extends Controller
             ->whereHas('por1', function ($query) {
                 $query->where(function ($q) {
                     $q->where('ItemCode', 'like', '%BLM%')
-                    ->orWhere('ItemCode', 'like', '%PPW%')
+                    // ->orWhere('ItemCode', 'like', '%PPW%')
                     ->orWhere('ItemCode', 'like', '%MC%');
                 })
                 ->whereIn('WhsCode', ['CAR', 'CAR2']); 
@@ -233,9 +237,9 @@ class IngredientsController extends Controller
             'ItemCode',
             'ItemName'
         )->where('ItemCode', 'like', '%BLM%')
-        ->orWhere('ItemCode', 'like', '%PPW%')
+        // ->orWhere('ItemCode', 'like', '%PPW%')
         ->orWhere('ItemCode', 'like', '%MC%')
-        ->orWhere('ItemCode', 'like', '%PPR%')
+        // ->orWhere('ItemCode', 'like', '%PPR%')
         ->get();
         if($endDate) {
             $incomings = OPRQ::with(['prq1'])
@@ -252,7 +256,7 @@ class IngredientsController extends Controller
             ->whereHas('prq1', function ($query) {
                 $query->where(function ($q) {
                     $q->where('ItemCode', 'like', '%BLM%')
-                    ->orWhere('ItemCode', 'like', '%PPW%')
+                    // ->orWhere('ItemCode', 'like', '%PPW%')
                     ->orWhere('ItemCode', 'like', '%MC%');
                 })
                 ->whereIn('WhsCode', ['CAR', 'CAR2']); 

@@ -49,8 +49,8 @@
                         }
                     @endphp
                     @foreach ($groups as $group)
-                        <h3>{{ $group->name }}</h3>
-                        <table class="table table-bordered table-striped table-hover tablewithSearch">
+                        <h3 class="group-title">{{ $group->name }}</h3>
+                        <table class="export-table1 table table-bordered table-striped table-hover tablewithSearch">
                             <tr>
                                 <th>Item Name</th>
                                 <th>Cumulative Quantity</th>
@@ -74,7 +74,7 @@
                                 </tr>
                             @endforeach
                         </table>
-                        <table class="table table-bordered table-striped table-hover">
+                        <table class="export-table2 table table-bordered table-striped table-hover">
                             <tr>
                                 <th>Doc Number</th>
                                 <th>Booked Orders</th>
@@ -198,7 +198,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive" >
-                    <table class="table table-bordered table-striped table-hover">
+                    <table id="table3" class="table table-bordered table-striped table-hover">
                         <thead>
                             <th>PR Number</th>
                             <th>Product Name</th>
@@ -275,7 +275,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive" >
-                    <table class="table table-bordered table-striped table-hover">
+                    <table id="table4" class="table table-bordered table-striped table-hover">
                         <thead>
                                 @foreach ($raw_materials as $raw_material)
                                     <th>{{ $raw_material->description }}</th>
@@ -335,7 +335,61 @@
         </div>
     </div>
 
-   
+    {{-- <button onclick="exportTablesToExcel()">Export to Excel</button> --}}
 </div>
 @include('orders.booked_orders.view')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+    function exportTablesToExcel() {
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.aoa_to_sheet([]);
+
+        const tables1 = document.querySelectorAll('.export-table1');
+        const tables2 = document.querySelectorAll('.export-table2');
+        const titles = document.querySelectorAll('.group-title');
+
+        let rowOffset = 0;
+    
+        titles.forEach((titleElem, index) => {
+            const title = titleElem?.innerText || `Group ${index + 1}`;
+
+            XLSX.utils.sheet_add_aoa(ws, [[title]], { origin: { r: rowOffset, c: 0 } });
+            rowOffset++;
+
+            XLSX.utils.sheet_add_aoa(ws, [['Table 1']], { origin: { r: rowOffset, c: 0 } });
+            rowOffset++;
+
+            const table1 = tables1[index];
+            if (table1) {
+                const tempSheet1 = XLSX.utils.table_to_sheet(table1);
+                const data1 = XLSX.utils.sheet_to_json(tempSheet1, { header: 1 });
+                XLSX.utils.sheet_add_aoa(ws, data1, { origin: { r: rowOffset, c: 0 } });
+                rowOffset += data1.length + 1;
+            }
+
+            XLSX.utils.sheet_add_aoa(ws, [['Table 2']], { origin: { r: rowOffset, c: 0 } });
+            rowOffset++;
+
+            const table2 = tables2[index];
+            if (table2) {
+                const tempSheet2 = XLSX.utils.table_to_sheet(table2);
+                const data2 = XLSX.utils.sheet_to_json(tempSheet2, { header: 1 });
+                XLSX.utils.sheet_add_aoa(ws, data2, { origin: { r: rowOffset, c: 0 } });
+                rowOffset += data2.length + 2; 
+            }
+        });
+
+        const table3 = document.getElementById('table3');
+        const ws3 = XLSX.utils.table_to_sheet(table3);
+        XLSX.utils.book_append_sheet(wb, ws3, 'Sheet3');
+
+        const table4 = document.getElementById('table4');
+        const ws4 = XLSX.utils.table_to_sheet(table4);
+        XLSX.utils.book_append_sheet(wb, ws4, 'Sheet4');
+    
+        XLSX.utils.book_append_sheet(wb, ws, 'All Groups');
+        XLSX.writeFile(wb, 'report.xlsx');
+    }
+    </script>
+    
 @endsection

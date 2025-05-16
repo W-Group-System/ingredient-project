@@ -116,7 +116,7 @@
 
                                             <td>{{ $firstRdr1->Quantity }}</td>
                                             <td>{{ $firstRdr1->ItemCode }}</td>
-                                            <td>{{ number_format($result, 2) }}</td>
+                                            <td class="d-flex justify-content-between"><span>{{ number_format($result, 2) }}</span> <span>({{ $firstMaterial ? $firstMaterial['percentage'] * 100 : 0 }}%)</span></td>
                                         @else
                                             @php
                                                 $materials = $order->materials; 
@@ -127,7 +127,7 @@
                                             @endphp
                                             <td>{{ $order->qty }}</td>
                                             <td>{{ $order->product_code }}</td>
-                                            <td>{{ number_format($result, 2) }}</td>
+                                            <td class="d-flex justify-content-between"><span>{{ number_format($result, 2) }}</span> <span>({{ $firstMaterial ? $firstMaterial['percentage'] * 100 : 0 }}%)</span></td>
                                         @endif
                                         @if ($order->type === 'sap')
                                             <td>{{ $order->DocDueDate }}</td>
@@ -157,7 +157,7 @@
                                                 @php
                                                     // $percentage = null;
                                                     // foreach ($order->rdr1 as $item) {
-                                                        $percentage = getMaterialPercentage($products, $order->product_code, $raw_material->description);
+                                                    $percentage = getMaterialPercentage($products, $order->product_code, $raw_material->description);
                                                         // if ($percentage) break;
                                                     // }
                                                     $value = $order->qty * $percentage;
@@ -167,7 +167,7 @@
                                                         $global_raw_material_totals[$raw_material->description] += $value;
                                                     }
                                                 @endphp
-                                                {{ $order->qty * $percentage == 0 ? '' : ($order->qty * $percentage ?? 'N/A') }}
+                                                {{ $order->qty * $percentage == 0 ? '' : ($order->qty * $percentage ?? 'N/A') }} 
                                             </td>
                                         @endif
                                         @endforeach
@@ -323,7 +323,7 @@
                                                     - ($global_raw_material_totals[$raw_material->description] ?? 0);
                                             @endphp
                                             
-                                            {{ $sum == 0 ? '' : number_format($sum, 2) }}
+                                            {{ $sum == 0 ? 0 : number_format($sum, 2) }}
                                        </strong>
                                     </td>
                                 @endforeach

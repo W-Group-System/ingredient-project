@@ -280,7 +280,8 @@ class IngredientGroupItem extends Model
         $reservedOrders->each(function ($order) use ($productMaterials) {
             foreach ($productMaterials as $product => $materials) {
                 $normalizedCode = str_replace([' ', '-'], '', $product);
-                if (stripos($order->product_code, $normalizedCode) !== false) {
+                $normalizedOrderCode = str_replace([' ', '-'], '', $order->product_code);
+                if (stripos($normalizedOrderCode, $normalizedCode) !== false) {
                     $order->materials = $materials;
                     break;
                 }

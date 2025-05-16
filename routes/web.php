@@ -121,6 +121,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     #Report
     Route::get('/', 'ReportController@index');
+    Route::get('/home', 'ReportController@index');
     Route::get('allocation_report', 'ReportController@index');
 
 });

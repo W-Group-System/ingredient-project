@@ -135,6 +135,22 @@ class ReportController extends Controller
         // }
         return back()->with('success', 'Ingredient group created successfully.');
     }
+
+    public function edit_group(Request $request, $id)
+
+    {
+        $new_group = IngredientGroup::findOrFail($id);
+        $existing_group = IngredientGroup::where('name', $request->name)
+            ->where('id', '!=', $id)
+            ->first();
+
+        if ($existing_group) {
+            return back()->withErrors(['name' => 'The ingredient group name must be unique.']);
+        }
+        $new_group->name = $request->name;
+        $new_group->save();
+        return back()->with('success', 'Ingredient group edited successfully.');
+    }
     public function view_group(Request $request, $id)
     {
         $group = IngredientGroup::where('id', $id)->first();

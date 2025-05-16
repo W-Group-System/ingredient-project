@@ -7,11 +7,11 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="{{url('edit_group/'. $group->id)}}" onsubmit="show()">
+            <form method="POST" action="{{url('edit_groups/'. $group->id)}}" onsubmit="show()">
                 @csrf 
                 <div class="modal-body">
                     <div class="form-group mb-2">
-                        Group Name
+                        Group Name 
                         <input type="text" name="name" class="form-control" value="{{ $group->name }}" required>
                     </div>
                 </div>

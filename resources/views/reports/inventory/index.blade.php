@@ -27,7 +27,7 @@
                                                 <button class="btn btn-primary mt-4" type="submit" id='submit' style="margin-top: 14px;">Generate</button>
                                             </div>
                                             <div class="col-lg-3">
-                                                <button class="btn btn-success mt-4" onclick="exportTablesToExcel()" style="margin-top: 14px;">Export</button>
+                                                <button class="btn btn-success mt-4" type="button" onclick="exportTablesToExcel()" style="margin-top: 14px;">Export</button>
                                             </div>
                                         </div>
                                     </form>

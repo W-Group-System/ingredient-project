@@ -22,8 +22,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-2">
-                                            <button class="btn btn-primary mt-4" type="submit" id='submit' style="margin-top: 14px;">Generate</button>
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <button class="btn btn-primary mt-4" type="submit" id='submit' style="margin-top: 14px;">Generate</button>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <button class="btn btn-success mt-4" onclick="exportTablesToExcel()" style="margin-top: 14px;">Export</button>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -114,7 +119,7 @@
                                                 $totalResult += $result;
                                             @endphp
 
-                                            <td>{{ $firstRdr1->Quantity }}</td>
+                                            <td>{{ number_format($firstRdr1->Quantity,2) }}</td>
                                             <td>{{ $firstRdr1->ItemCode }}</td>
                                             <td class="d-flex justify-content-between"><span>{{ number_format($result, 2) }}</span> <span>({{ $firstMaterial ? $firstMaterial['percentage'] * 100 : 0 }}%)</span></td>
                                         @else
@@ -125,18 +130,18 @@
                                                 $result = $firstMaterial ? $firstMaterial['percentage'] * $quantity : 0;
                                                 $totalResult += $result;
                                             @endphp
-                                            <td>{{ $order->qty }}</td>
+                                            <td>{{ number_format($order->qty,2) }}</td>
                                             <td>{{ $order->product_code }}</td>
                                             <td class="d-flex justify-content-between"><span>{{ number_format($result, 2) }}</span> <span>({{ $firstMaterial ? $firstMaterial['percentage'] * 100 : 0 }}%)</span></td>
                                         @endif
                                         @if ($order->type === 'sap')
-                                            <td>{{ $order->DocDueDate }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($order->DocDueDate)->format('m-d-Y') }}</td>
                                         @else
-                                            <td>{{ $order->load_date }}</td>
+                                            <td>{{ \Carbon\Carbon::parse( $order->load_date)->format('m-d-Y') }}</td>
                                         @endif
                                         @foreach ($raw_materials as $raw_material)
                                         @if ($order->type === 'sap' && $order->rdr1->isNotEmpty())
-                                            <td>
+                                            <td >
                                                 @php
                                                     $percentage = null;
                                                     foreach ($order->rdr1 as $item) {
@@ -150,10 +155,15 @@
                                                         $global_raw_material_totals[$raw_material->description] += $value;
                                                     }
                                                 @endphp
-                                                {{ $order->rdr1->first()->Quantity * $percentage == 0 ? '' : ($order->rdr1->first()->Quantity * $percentage ?? 'N/A') }}
+                                               <div class="d-flex justify-content-between">
+                                                    <span>  {{ $order->rdr1->first()->Quantity * $percentage == 0 ? '' : (number_format($order->rdr1->first()->Quantity * $percentage,2) ?? 'N/A') }}</span>
+                                                    @if ($percentage !=0)
+                                                        <span>({{ $percentage ? $percentage * 100 : "" }}%)</span>
+                                                    @endif
+                                                </div>
                                             </td>
                                         @else
-                                            <td>
+                                            <td >
                                                 @php
                                                     // $percentage = null;
                                                     // foreach ($order->rdr1 as $item) {
@@ -167,7 +177,12 @@
                                                         $global_raw_material_totals[$raw_material->description] += $value;
                                                     }
                                                 @endphp
-                                                {{ $order->qty * $percentage == 0 ? '' : ($order->qty * $percentage ?? 'N/A') }} 
+                                                <div class="d-flex justify-content-between">
+                                                    <span>  {{ $order->qty * $percentage == 0 ? '' : (number_format($order->qty * $percentage,2) ?? 'N/A') }} </span>
+                                                    @if ($percentage !=0)
+                                                        <span>({{ $percentage ? $percentage * 100 : "" }}%)</span>
+                                                    @endif
+                                                </div>
                                             </td>
                                         @endif
                                         @endforeach
@@ -203,6 +218,7 @@
                             <th>PR Number</th>
                             <th>Product Name</th>
                             <th>Quantity</th>
+                            <th>PO Number</th>
                         </thead>
                         @php
                             $totals = []; 
@@ -334,8 +350,6 @@
             </div>
         </div>
     </div>
-
-    {{-- <button onclick="exportTablesToExcel()">Export to Excel</button> --}}
 </div>
 @include('orders.booked_orders.view')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -381,11 +395,11 @@
 
         const table3 = document.getElementById('table3');
         const ws3 = XLSX.utils.table_to_sheet(table3);
-        XLSX.utils.book_append_sheet(wb, ws3, 'Sheet3');
+        XLSX.utils.book_append_sheet(wb, ws3, 'Incoming');
 
         const table4 = document.getElementById('table4');
         const ws4 = XLSX.utils.table_to_sheet(table4);
-        XLSX.utils.book_append_sheet(wb, ws4, 'Sheet4');
+        XLSX.utils.book_append_sheet(wb, ws4, 'Raw Materials');
     
         XLSX.utils.book_append_sheet(wb, ws, 'All Groups');
         XLSX.writeFile(wb, 'report.xlsx');

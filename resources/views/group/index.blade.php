@@ -45,6 +45,9 @@
                                             </button>
                                         </form>
                                     @endif
+                                    <button type="button" class="btn btn-danger btn-rounded btn-icon" title="delete" onclick="deleteGroup({{ $group->id }})">
+                                        <i class="ti-trash"></i>
+                                    </button>
                                 </td>
                                 <td>{{ $group->name }}</td>
                                 <td>
@@ -63,15 +66,49 @@
         </div>
     </div>
 </div>
-<script>
-    
-</script>
 @include('group.new_group')
 @foreach ($groups as $group)
 @include('group.edit_group')
 @endforeach
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+    function deleteGroup(id){
+        Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url:'{{ url('delete_group') }}/' + id,
+                    type: 'DELETE',
+                    data: {
+                        '_token': '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        Swal.fire(
+                            'Deleted!',
+                            'The group has been deleted',
+                            'success'
+                        ).then(() => {
+                            location.reload();
+                        })
+                    },
+                    error: function(xhr) {
+                        Swal.fire(
+                            'Error!',
+                            'An error occured while deleteing the group.',
+                            'error'
+                        )
+                    }
+                })
+            }
+        });
+    };
     @if ($errors->any())
         Swal.fire({
             icon: 'error',
@@ -89,5 +126,7 @@
             confirmButtonColor: '#3085d6'
         });
     @endif
+
+    
 </script>
 @endsection

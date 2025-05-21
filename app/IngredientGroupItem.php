@@ -232,6 +232,7 @@ class IngredientGroupItem extends Model
             foreach (array_chunk($docEntries, 2000) as $chunk) {
                 $result = ORDR::whereIn('DocEntry', $chunk)
                     ->whereBetween('DocDueDate', [$startDate, $endDate])
+                    ->where('NumAtCard', 'NOT LIKE', '%MRDC%')
                     ->where('U_PlaceLoading', 'LIKE', '%Philippines%')
                     ->whereDoesntHave('productionOrders', function ($query) {
                         $query->where('Status', 'L');

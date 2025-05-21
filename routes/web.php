@@ -112,6 +112,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/edit_group/{id}', 'ReportController@new_group');
     Route::delete('/delete_ingredient/{id}', 'ReportController@delete_ingredient');
     Route::post('/edit_groups/{id}', 'ReportController@edit_group');
+    Route::delete('/delete_group/{id}', 'ReportController@delete_group');
 
     Route::get('raw_material', 'ReportController@raw_materials');
     Route::post('/add_material','ReportController@add_material');

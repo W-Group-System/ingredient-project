@@ -65,7 +65,7 @@
                                                 @include('raw_materials.outbound_materials')
                                             </td> --}}
                                             <td>{{ $allocated->NumAtCard }}</td>
-                                            <td>{{ $materials->Quantity }}</td>
+                                            <td>{{ number_format($materials->Quantity,2) }}</td>
                                             <td>{{ $materials->Dscription }}</td>
                                         </tr>
                                     @endforeach

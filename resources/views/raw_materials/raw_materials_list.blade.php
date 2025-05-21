@@ -47,8 +47,6 @@
                                         @endforeach --}}
                                         {{-- {{dd($raw_material)}} --}}
                                     </tr>
-
-                                    @include('raw_materials.view_raw_materials')
                                 @endforeach
                             </tbody>
                         </table>
@@ -57,4 +55,8 @@
             </div>
         </div>
     </div>
+
+    @foreach ($raw_materials as $raw_material)
+        @include('raw_materials.view_raw_materials') 
+    @endforeach
 @endsection

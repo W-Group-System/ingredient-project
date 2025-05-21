@@ -118,6 +118,7 @@ class IngredientsController extends Controller
                     $q->where('ItemCode', 'like', '%BLM%')
                     ->orWhere('ItemCode', 'like', '%PPW%')
                     ->orWhere('ItemCode', 'like', '%MC%')
+                    ->orWhere('ItemCode', 'not like', '%MC-MILLER%')
                     ->orWhere('ItemCode', 'like', '%PPR%');
                 })
                 ->whereIn('WhsCode', ['CAR', 'CAR2']); 
@@ -172,6 +173,7 @@ class IngredientsController extends Controller
                 'DocDate',
                 'DocDueDate'
             )
+            ->where('NumAtCard', 'NOT LIKE', '%MRDC%')
             ->where('U_PlaceLoading', 'LIKE', '%Philippines%')
             ->whereHas('rdr1', function ($query) {
                 $query->whereIn('WhsCode', ['CAR','CAR2']);
@@ -210,6 +212,7 @@ class IngredientsController extends Controller
                 $query->where(function ($q) {
                     $q->where('ItemCode', 'like', '%BLM%')
                     // ->orWhere('ItemCode', 'like', '%PPW%')
+                    ->orWhere('ItemCode', 'not like', '%MC-MILLER%')
                     ->orWhere('ItemCode', 'like', '%MC%');
                 })
                 ->whereIn('WhsCode', ['CAR', 'CAR2']); 
@@ -236,10 +239,18 @@ class IngredientsController extends Controller
         $materials = OITM::select(
             'ItemCode',
             'ItemName'
-        )->where('ItemCode', 'like', '%BLM%')
-        // ->orWhere('ItemCode', 'like', '%PPW%')
-        ->orWhere('ItemCode', 'like', '%MC%')
-        // ->orWhere('ItemCode', 'like', '%PPR%')
+        )
+        // ->where('ItemCode', 'like', '%BLM%')
+        // // ->orWhere('ItemCode', 'like', '%PPW%')
+        // ->orWhere('ItemCode', 'like', '%MC%')
+        // ->orWhere('ItemCode', 'not like', '%MC-MILLER%')
+        // // ->orWhere('ItemCode', 'like', '%PPR%')
+        ->where(function ($query) {
+            $query->where('ItemCode', 'like', '%BLM%')
+                  // ->orWhere('ItemCode', 'like', '%PPW%')  // Uncomment if needed
+                  ->orWhere('ItemCode', 'like', '%MC%');
+        })
+        ->where('ItemCode', 'not like', '%MC-MILLER%')
         ->get();
         if($endDate) {
             $incomings = OPRQ::with(['prq1'])
@@ -259,6 +270,7 @@ class IngredientsController extends Controller
                     // ->orWhere('ItemCode', 'like', '%PPW%')
                     ->orWhere('ItemCode', 'like', '%MC%');
                 })
+                ->where('ItemCode', 'not like', '%MC-MILLER%')
                 ->whereIn('WhsCode', ['CAR', 'CAR2']); 
             })
             // ->where('DocStatus', '!=', 'C') 

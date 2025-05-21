@@ -207,6 +207,17 @@ class ReportController extends Controller
             return response()->json(['success' => false, 'message' => 'Failed to delete Ingredient.'], 500);
         }
     }
+    public function delete_group($id){
+        try{
+            $group = IngredientGroup::findOrFail($id);
+            $group->items()->delete();
+            $group->delete();
+
+            return response()->json(['success' => true, 'message' => 'Group and related items deleted.']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Error: ' . $e->getMessage()], 500);
+        }
+    }
     public function deactivate($id)
     {
         try { 

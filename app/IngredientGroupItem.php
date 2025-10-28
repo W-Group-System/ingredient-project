@@ -50,7 +50,7 @@ class IngredientGroupItem extends Model
 
     public function getParentProducts($itemCode)
     {
-        $apiUrl = 'https://crms-wgroup.wsystem.online/api/get-products';
+        $apiUrl = 'https://crms-v2.wgroup.space//api/get-products';
         $client = new Client();
 
         try {

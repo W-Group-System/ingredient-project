@@ -18,11 +18,11 @@ class ReportController extends Controller
     {
         $startDate = $request->from_date ?? now();
         $endDate = $request->end_date ?? now(); 
-        // $response = file_get_contents(env('GET_PRODUCT'), 'https://crms-wgroup.wsystem.online/');
+        // $response = file_get_contents(env('GET_PRODUCT'), 'https://crms-v2.wgroup.space//');
         // $raw_materials = null;
         // $raw_materials = json_decode($response, true);
         $client = new Client();
-        $response = $client->get('https://crms-wgroup.wsystem.online/api/get-products');
+        $response = $client->get('https://crms-v2.wgroup.space//api/get-products');
 
         $body = $response->getBody();
         $products = json_decode($body, true);

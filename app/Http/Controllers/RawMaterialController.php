@@ -13,7 +13,7 @@ class RawMaterialController extends Controller
      */
     public function index()
     {
-        $response = file_get_contents(env('GET_RAW_MATERIALS'), 'https://crms-wgroup.wsystem.online/');
+        $response = file_get_contents(env('GET_RAW_MATERIALS'), 'https://crms-v2.wgroup.space/');
         $raw_materials = json_decode($response);
         // dd($raw_materials);
         return view('raw_materials.raw_materials_list', compact('raw_materials'));

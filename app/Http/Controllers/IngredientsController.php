@@ -248,7 +248,10 @@ class IngredientsController extends Controller
         ->where(function ($query) {
             $query->where('ItemCode', 'like', '%BLM%')
                   // ->orWhere('ItemCode', 'like', '%PPW%')  // Uncomment if needed
-                  ->orWhere('ItemCode', 'like', '%MC%');
+                  ->orWhere('ItemCode', 'like', '%MC%')
+                  ->orWhere('ItemCode', 'like', '%PFG%')
+                  ->orWhere('ItemCode', 'like', '%PES%')
+                  ->orWhere('ItemCode', 'like', '%CM%');
         })
         ->where('ItemCode', 'not like', '%MC-MILLER%')
         ->get();

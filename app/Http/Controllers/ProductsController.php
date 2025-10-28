@@ -12,7 +12,7 @@ class ProductsController extends Controller
         //     'productMaterialComposition'
         // ])->get();
         
-        $get_products = file_get_contents(env('GET_PRODUCT', 'https://crms-wgroup.wsystem.online/'));
+        $get_products = file_get_contents(env('GET_PRODUCT'));
         $products = json_decode($get_products);
         
         return view('products.index', compact('products'));

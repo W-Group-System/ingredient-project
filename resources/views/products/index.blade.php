@@ -7,7 +7,7 @@
                 <p class="text-white">Total Products</p>
             </div>
             <div class="card-body">
-                <p class="fs-30 mb-2">{{count($products)}}</p>
+                {{-- <p class="fs-30 mb-2">{{count($products)}}</p> --}}
             </div>
         </div>
     </div>
